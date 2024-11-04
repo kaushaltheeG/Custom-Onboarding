@@ -17,14 +17,14 @@ export const PAGE_PLACEMENT = {
 export type PagePlacementType = ObjectValues<typeof PAGE_PLACEMENT>;
 
 export interface IComponent {
-  type: ComponentType,
-  page: PagePlacementType,
-  order: number,
+  type: ComponentType;
+  page: PagePlacementType;
+  order: number;
 }
 
 interface ISite extends IModel {
-  name: string,
-  layout: IComponent[],
+  name: string;
+  layout: IComponent[];
 }
 export default ISite;
 

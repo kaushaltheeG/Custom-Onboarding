@@ -1,13 +1,13 @@
 import assert from "assert";
 import IUser, { isValidPendingCustomer, isValidUserData } from "../interfaces/models/IUser";
-import Model from "./base";
+import Model from "./Base";
 import { isValidEmail } from "../utils/validations";
 
 class User extends Model<IUser> {
   private _firstName!: IUser['firstName'];
   private _lastName!: IUser['lastName'];
   private _email!: IUser['email'];
-  private _passowrdHash!: IUser['passwordHash'];
+  private _passwordHash!: IUser['passwordHash'];
   private _data!: IUser['data'];
   private _pendingCustomer!: IUser['pendingCustomer'];
 
@@ -17,7 +17,7 @@ class User extends Model<IUser> {
     this._firstName = firstName;
     this._lastName = lastName;
     this._email = email;
-    this._passowrdHash = passwordHash;
+    this._passwordHash = passwordHash;
     this._data = data;
     this._pendingCustomer = pendingCustomer;
   }
@@ -51,11 +51,11 @@ class User extends Model<IUser> {
     this._email = value;
   }
 
-  get passowrdHash() {
-    return this._passowrdHash;
+  get passwordHash() {
+    return this._passwordHash;
   }
 
-  set passowrdHash(value: string) {
+  set passwordHash(value: string) {
     assert(false || !value.length, `unable to change the password hash for ${this._firstName} ${this._lastName}`);
   }
 

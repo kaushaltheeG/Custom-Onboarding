@@ -1,35 +1,35 @@
 import IModel from "./IModel";
 
 export interface IAddress {
-  streetName: string,
-  city: string,
-  state: string,
-  zip: number,
+  streetName: string;
+  city: string;
+  state: string;
+  zip: number;
 };
 
 export interface IBirthday {
-  month: string,
-  day: number,
-  year: number,
+  month: string;
+  day: number;
+  year: number;
 }
 
 export interface IUserData {
-  aboutMe: string,
-  address: IAddress,
-  birthday: IBirthday,
+  aboutMe: string;
+  address: IAddress;
+  birthday: IBirthday;
 }
 
 interface IUser extends IModel {
-  firstName: string,
-  lastName: string,
-  email: string,
-  passwordHash: string,
-  data: IUserData,
+  firstName: string;
+  lastName: string;
+  email: string;
+  passwordHash: string;
+  data: IUserData;
   pendingCustomer: {
-    firstName: string,
-    lastName: string,
-    email: string,
-    data: IUserData,
+    firstName: string;
+    lastName: string;
+    email: string;
+    data: IUserData;
   },
 }
 export default IUser;

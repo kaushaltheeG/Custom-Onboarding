@@ -1,6 +1,6 @@
 import assert from "assert";
 import ISite, { isValidSiteLayout } from "../interfaces/models/ISite";
-import Model from "./base";
+import Model from "./Base";
 
 const AVAILABLE_SITE_COMPONENTS = 3;
 
