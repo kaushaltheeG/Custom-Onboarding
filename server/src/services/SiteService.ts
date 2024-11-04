@@ -2,6 +2,7 @@ import { Collection } from "mongodb";
 import Site from "../models/Site";
 import ISiteService from "../interfaces/services/ISiteService";
 import ISite, { IComponent } from "../interfaces/models/ISite";
+import assert from "assert";
 
 // only one site document will exist
 const SITE_NAME = 'main';
@@ -14,11 +15,19 @@ class SiteService implements ISiteService {
   }
 
   async getSite(): Promise<ISite | null> {
-    const site = await this._siteCollection.findOne({ name: SITE_NAME });
-    if (!site) {
-      return null;
+    try {
+      const site = await this._siteCollection.findOne({ name: SITE_NAME });
+      if (!site) {
+        return null;
+      }
+      return new Site(site).toDTO();
+    } catch (error) {
+      if (error instanceof assert.AssertionError) {
+        throw new Error(error.message);
+      } else {
+        throw error;
+      }
     }
-    return new Site(site).toDTO();
   }
 
   async updateLayout(layoutData: IComponent[]): Promise<ISite | null> {
@@ -42,8 +51,11 @@ class SiteService implements ISiteService {
       );
       return await this.getSite();
     } catch (error) {
-      console.log(error)
-      throw error;
+      if (error instanceof assert.AssertionError) {
+        throw new Error(error.message);
+      } else {
+        throw error;
+      }
     }
   }
 }

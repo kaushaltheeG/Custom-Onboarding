@@ -52,7 +52,7 @@ export const isValidUserData = (obj: any, checkLength = true): boolean => {
 
 export const isValidAddress = (obj: any, checkLength = true): boolean => {
   const firstCheck = (
-    'streeName' in obj && typeof obj.streeName === 'string' &&
+    'streetName' in obj && typeof obj.streetName === 'string' &&
     'city' in obj && typeof obj.city === 'string' &&
     'state' in obj && typeof obj.state === 'string' &&
     'zip' in obj && typeof obj.zip === 'number'

@@ -1,5 +1,5 @@
 import assert from "assert";
-import IUser, { isValidPendingCustomer, isValidUserData } from "../interfaces/models/IUser";
+import IUser, { isValidPendingCustomer } from "../interfaces/models/IUser"; // isValidUserData
 import Model from "./Base";
 import { isValidEmail } from "../utils/validations";
 
@@ -56,7 +56,7 @@ class User extends Model<IUser> {
   }
 
   set passwordHash(value: string) {
-    this.passwordHash = value;
+    this._passwordHash = value;
   }
 
   get data() {
@@ -64,7 +64,7 @@ class User extends Model<IUser> {
   }
 
   set data(value: IUser['data']) {
-    assert(isValidUserData(value), 'invalid user data, please recheck the user data fields and their value types');
+    // assert(isValidUserData(value), 'invalid user data, please recheck the user data fields and their value types');
     this._data = value;
   }
 

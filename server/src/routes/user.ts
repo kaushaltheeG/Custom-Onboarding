@@ -14,32 +14,44 @@ const createUserRouter = (db: Db) => {
       ctx.body = users;
       ctx.status = 200;
     } catch (error) {
-      ctx.status = 400;
-      ctx.message = error;
+      ctx.status = 500;
+      ctx.body = { success: false, error: error.message };
     }
   });
   
   userRouter.post('/validate', async (ctx) => {
     try {
-      const { email, password } = ctx.body;
+      const { email, password } = ctx.request.body as { email: string, password: string };
+      if (!email || typeof email !== 'string') {
+        ctx.throw(400, 'email is required for request and must be a string');
+      }
+      if (!password || typeof password !== 'string') {
+        ctx.throw(400, 'password is required for request and must be a string');
+      }
+
       const passwordHash = await userService.createPassowrdHash(password);
       const user = await userService.getUser(email, passwordHash);
+      if (!user) {
+        ctx.body = null;
+        ctx.status = 204;
+        return;
+      }
       ctx.body = user;
       ctx.status = 200;
     } catch (error) {
-      ctx.status = 400;
-      ctx.message = error;
+      ctx.status = 500;
+      ctx.body = { success: false, error: error.message };
     }
   });
   
   userRouter.post('/new', async (ctx) => {
     try {
-      const newUser = await userService.insertUser(ctx.body);
+      const newUser = await userService.insertUser(ctx.request.body as any);
       ctx.body = newUser;
-      ctx.body = 200;
+      ctx.status = 200;
     } catch (error) {
-      ctx.status = 400;
-      ctx.message = error;
+      ctx.status = 500;
+      ctx.body = { success: false, error: error.message };
     }
   });
   

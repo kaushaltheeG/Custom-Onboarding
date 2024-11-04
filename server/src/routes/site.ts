@@ -16,7 +16,7 @@ const createSiteRouter = (db: Db) => {
       ctx.status = 200;
     } catch (error) {
       ctx.status = 400;
-      ctx.body = { success: false, error };
+      ctx.body = { success: false, error: error.message };
     }
   });
   
@@ -27,7 +27,7 @@ const createSiteRouter = (db: Db) => {
       ctx.status = 200;
     } catch (error) {
       ctx.status = 400;
-      ctx.body = { success: false, error };
+      ctx.body = { success: false, error: error.message };
     }
   });
   
