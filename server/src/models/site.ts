@@ -10,6 +10,9 @@ class Site extends Model<ISite> {
 
   constructor(dto: ISite) {
     super(dto);
+    const { name, layout } = dto;
+    this._name = name;
+    this._layout = layout;
   }
 
   get name() {
@@ -17,7 +20,7 @@ class Site extends Model<ISite> {
   }
 
   set name(value: string) {
-    assert(false || !value.length, 'unable to change site\'s name');
+    this._name = value;
   }
 
   get layout() {

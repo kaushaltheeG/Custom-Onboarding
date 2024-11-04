@@ -9,7 +9,7 @@ const dbName = process.env.MONGO_DB_NAME;
 let connectedDatabase: Db | null = null;
 
 // Connect to the mongo database
-export const connectDB = async (): Promise<void> => {
+export const connectDB = async (): Promise<Db> => {
   try {
     const client = new MongoClient(uri, {
       serverApi: {
@@ -21,6 +21,7 @@ export const connectDB = async (): Promise<void> => {
     await client.connect();
     connectedDatabase = client.db(dbName);
     console.log('MongoDB Connected...');
+    return connectedDatabase;
   } catch (err) {
     console.error('Failed to connect to MongoDB:', err);
     process.exit(1);

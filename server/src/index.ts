@@ -1,8 +1,9 @@
 import Koa from 'koa';
-// import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import { connectDB } from './utils/mongodb';
 import dotenv from 'dotenv';
+import createSiteRouter from './routes/site';
+import createUserRouter from './routes/user';
 
 dotenv.config()
 
@@ -11,12 +12,15 @@ const PORT = process.env.PORT || 5000;
 
 
 // Connect to MongoDB
-connectDB().then(() => {
+connectDB().then((db) => {
   // Middleware
   app.use(bodyParser());
 
   // Routes
-  // add routes
+  const siteRoutes = createSiteRouter(db).prefix('/api');
+  const userRoutes = createUserRouter(db).prefix('/api');
+  app.use(siteRoutes.routes()).use(siteRoutes.allowedMethods());
+  app.use(userRoutes.routes()).use(userRoutes.allowedMethods());
 
   // Start the server
   app.listen(PORT, () => {

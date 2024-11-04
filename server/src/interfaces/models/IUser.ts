@@ -19,6 +19,10 @@ export interface IUserData {
   birthday: IBirthday;
 }
 
+export type ICreateUser = Omit<IUser, 'passwordHash'> & {
+  password: string;
+};
+
 interface IUser extends IModel {
   firstName: string;
   lastName: string;

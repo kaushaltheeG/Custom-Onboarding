@@ -1,8 +1,8 @@
-import IUser from "../models/IUser";
+import IUser, { ICreateUser } from "../models/IUser";
 
 interface IUserService {
   createPassowrdHash(password: string): Promise<string>;
-  insertUser(dto: IUser): Promise<boolean>;
+  insertUser(dto: ICreateUser): Promise<IUser | null>;
   getUser(email: string, passwordHash: string): Promise<IUser | null>;
   getUsers(): Promise<IUser[]>;
 }

@@ -22,24 +22,29 @@ class SiteService implements ISiteService {
   }
 
   async updateLayout(layoutData: IComponent[]): Promise<ISite | null> {
-    const site = await this.getSite();
-    if (!site) {
-      return null;
-    }
-    site.layout = layoutData;
+    try {
+      const site = await this.getSite();
+      if (!site) {
+        return null;
+      }
 
-    // validates the site's new layout
-    const updatedSite = new Site(site);
-    await this._siteCollection.updateOne(
-      { name: SITE_NAME },
-      {
-        $set : {
-          layout: updatedSite.layout,
+      site.layout = layoutData;
+
+      // validates the site's new layout
+      const updatedSite = new Site(site);
+      await this._siteCollection.updateOne(
+        { name: SITE_NAME },
+        {
+          $set : {
+            layout: updatedSite.layout,
+          },
         },
-      },
-    );
-
-    return await this.getSite();
+      );
+      return await this.getSite();
+    } catch (error) {
+      console.log(error)
+      throw error;
+    }
   }
 }
 export default SiteService;

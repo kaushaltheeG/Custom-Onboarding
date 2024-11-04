@@ -43,7 +43,6 @@ export const isValidSiteLayout = (componentArray: any[], expectedCount: number):
   }
   const seenComponentSet = new Set();
   const seenPlacementSet = new Set();
-
   for (const component of componentArray) {
     const rootCheck = (
       'type' in component &&
@@ -67,7 +66,7 @@ export const isValidSiteLayout = (componentArray: any[], expectedCount: number):
     }
 
     // check if order is inclusively between 0 & 3
-    if (!(0 <= component.order && component <= 3)) {
+    if (!(0 <= component.order && component.order <= 3)) {
       return false;
     }
 

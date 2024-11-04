@@ -1,7 +1,7 @@
 import { Collection } from "mongodb";
 import IUserService from "../interfaces/services/IUserService";
 import User from "../models/User";
-import IUser from "../interfaces/models/IUser";
+import IUser, { ICreateUser } from "../interfaces/models/IUser";
 import bcrypt from 'bcryptjs';
 
 class UserService implements IUserService {
@@ -16,10 +16,14 @@ class UserService implements IUserService {
     return await bcrypt.hash(password, 0)
   }
 
-  async insertUser(dto: IUser): Promise<boolean> {
-    const user = new User(dto);
+  async insertUser(dto: ICreateUser): Promise<IUser | null> {
+    const { password, ...remainingDto } = dto;
+    const passwordHash = await this.createPassowrdHash(password);
+    const userDto: IUser = { ...remainingDto, passwordHash };
+    const user = new User(userDto);
     await this._userCollection.insertOne(user);
-    return true;
+
+    return await this.getUser(user.email, user.passwordHash);
   }
 
   async getUser(email: string, passwordHash: string): Promise<IUser | null> {

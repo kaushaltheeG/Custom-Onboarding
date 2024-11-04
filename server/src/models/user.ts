@@ -56,7 +56,7 @@ class User extends Model<IUser> {
   }
 
   set passwordHash(value: string) {
-    assert(false || !value.length, `unable to change the password hash for ${this._firstName} ${this._lastName}`);
+    this.passwordHash = value;
   }
 
   get data() {
