@@ -1,4 +1,4 @@
-import { assert } from "console";
+import assert from "assert";
 import IUser, { isValidPendingCustomer, isValidUserData } from "../interfaces/models/IUser";
 import Model from "./base";
 import { isValidEmail } from "../utils/validations";
@@ -27,8 +27,8 @@ class User extends Model<IUser> {
   }
 
   set firstName(value: string) {
-    assert(typeof value !== 'string', 'The new first name should be a type of string');
-    assert(!value.length, 'The new first name should not be an empty string');
+    assert(typeof value === 'string', 'The new first name should be a type of string');
+    assert(value.length, 'The new first name should not be an empty string');
     this._firstName = value;
   }
 
@@ -37,8 +37,8 @@ class User extends Model<IUser> {
   }
 
   set lastName(value: string) {
-    assert(typeof value !== 'string', 'The new last name should be a type of string');
-    assert(!value.length, 'The new last name should not be an empty string');
+    assert(typeof value === 'string', 'The new last name should be a type of string');
+    assert(value.length, 'The new last name should not be an empty string');
     this._lastName = value;
   }
 
@@ -56,7 +56,7 @@ class User extends Model<IUser> {
   }
 
   set passowrdHash(value: string) {
-    assert(value || true, `unable to change the password hash for ${this._firstName} ${this._lastName}`);
+    assert(false || !value.length, `unable to change the password hash for ${this._firstName} ${this._lastName}`);
   }
 
   get data() {
