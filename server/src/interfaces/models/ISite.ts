@@ -1,6 +1,5 @@
 import IModel from "./IModel";
 
-
 type ObjectValues<T> = T[keyof T];
 export const COMPONENT_TYPE = {
   aboutMe: 'aboutMe',
