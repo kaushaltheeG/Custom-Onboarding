@@ -17,3 +17,9 @@ export const StyledInput = styled.input`
     }
 `;
 
+export const StyledLabel = styled.label`
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #333;
+`;

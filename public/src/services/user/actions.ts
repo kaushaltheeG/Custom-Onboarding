@@ -1,5 +1,5 @@
-import { DeepPartial } from "../utils";
-import { NewUserType } from "./api";
+import { DeepPartial } from "../../utils";
+import { INewUser } from "./api";
 import IUser from "./model";
 
 export const SET_USER = 'user/SET_USER';
@@ -74,7 +74,7 @@ export const setUsers = (users: IUser[]): ISetUsers => {
   };
 };
 
-export const addNewUserInfo = (user: NewUserType): IAddUserInfo => {
+export const addNewUserInfo = (user: INewUser): IAddUserInfo => {
   return {
     payload: { user },
     type: ADD_USER_INFO,

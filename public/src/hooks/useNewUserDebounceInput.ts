@@ -10,8 +10,9 @@ const useNewUserDebounceInput = (initialState: any, debounceDelay: number) => {
     const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
     const newUserInfo = useSelector(getNewUserInfo);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
+        console.log(`name: ${name} value: ${value}`)
         setInputState((prev: {any: any}) => ({
             ...prev,
             [name]: value,
@@ -21,15 +22,14 @@ const useNewUserDebounceInput = (initialState: any, debounceDelay: number) => {
         if (debounceTimeout.current) {
             clearTimeout(debounceTimeout.current);
         }
-
-        for (let key in inputState) {
-            // @ts-ignore
-            newUserInfo[key] = inputState[key];
-        }
+        const createNewUserInfo = {
+            ...newUserInfo,
+            [name]: value,
+        };
 
         // Set a new timeout to dispatch after the specified delay
         debounceTimeout.current = setTimeout(() => {
-            dispatch(addNewUserInfo(newUserInfo)); // Dispatch updated inputState
+            dispatch(addNewUserInfo(createNewUserInfo)); // Dispatch updated inputState
         }, debounceDelay);
     };
 

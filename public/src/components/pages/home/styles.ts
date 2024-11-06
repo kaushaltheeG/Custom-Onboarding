@@ -81,3 +81,53 @@ export const FormControl = styled.div`
   width: 100%;
   justify-content: space-evenly;
 `;
+
+export const BirthdayContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 50px;
+`;
+
+export const StyledLabel = styled.label`
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #333;
+`;
+
+export const PageTwoAndThreeContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: auto;
+  flex-direction: column;
+  gap: 100px;
+`;
+
+export const ColumnAlign = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  align-items: flex-start;
+  padding: 10px;
+`;
+
+export const RowAlign = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px;
+`;
+
+export const AddressContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px;
+`;

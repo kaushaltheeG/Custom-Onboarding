@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { InputContainer, StyledInput } from "./styled";
+import { InputContainer, StyledInput, StyledLabel } from "./styled";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     label?: string; // Optional label
@@ -19,7 +19,7 @@ const Input: React.FC<InputProps> = ({ label, type = "text", ...props }) => {
 
     return (
         <InputContainer>
-            {label && <label>{label}</label>}
+            {label && <StyledLabel>{label}</StyledLabel>}
             <StyledInput 
                 type={type} 
                 value={value} // Controlled input value

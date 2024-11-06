@@ -10,12 +10,13 @@ import PageOne from "./Pages/pageOne";
 import FormControler from "./FormControler";
 import useFormControler from "../../../hooks/useFormControler";
 import { getCurrentFormPage } from "../../../services/form/selector";
+import PageTwoOrThree from "./Pages/pageTwoOrThree";
 
 
 const Home: React.FC = () => {
   const [email, setEmail] = React.useState('');
   const [passwordOne, setPasswordOne] = React.useState('');
-  const [tiredValidation, setTriedValidation] = React.useState(false);
+  const [tiredValidation, setTriedValidation] = React.useState(true);
   const [errors, setErrors] = React.useState('');
   const dispatch = useDispatch<Dispatch<IUserActions>>();
   const loggedInUser = useSelector(getLoggedInUser);
@@ -71,7 +72,7 @@ const Home: React.FC = () => {
     }
     switch(currentFormPage) {
       case 1:
-        return <PageOne />;
+        return  <PageTwoOrThree />//<PageOne />;
       case 2:
         return;
       case 3:

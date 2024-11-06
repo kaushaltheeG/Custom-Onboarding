@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getNewUserInfo } from "../services/user/selectors";
-import { NewUserType } from "../services/user/api";
+import { INewUser } from "../services/user/api";
 import { getCurrentPageMap } from "../services/site/selectors";
 import { IFormActions, setCurrentFormPage } from "../services/form/action";
 import { Dispatch } from "redux";
@@ -50,7 +50,7 @@ const useFormControler = (state: number): {
 };
 
 const checkNewUserInfoIsFilled = (
-  newUserInfo: NewUserType,
+  newUserInfo: INewUser,
   pageNum: number,
   currentPageLayoutMap: {[page: number]: string[]}
 ) => {
@@ -60,10 +60,7 @@ const checkNewUserInfoIsFilled = (
     if (newUserInfo[field]) {
       continue;
     }
-    // @ts-ignore
-    if (newUserInfo.data[field]) {
-      continue
-    }
+
     return false;
   }
   return true;

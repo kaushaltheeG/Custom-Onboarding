@@ -1,10 +1,10 @@
 import { ADD_USER_INFO, IUserActions, SET_USER, SET_USERS } from "./actions";
-import { NewUserType } from "./api";
+import { INewUser } from "./api";
 import IUser from "./model";
 
 
 export interface IUserState {
-  newUser: NewUserType,
+  newUser: INewUser,
   user: IUser | null,
   users: IUser[],
 }
@@ -17,39 +17,14 @@ const INITIAL_USER_STATE: IUserState = {
     lastName: '',
     email: '',
     password: '',
-    data: {
-      aboutMe: '',
-      address: {
-        streetName: '',
-        city: '',
-        state: '',
-        zip: 0,
-      },
-      birthday: {
-        month: '',
-        day: 0,
-        year: 0,
-      },
-    },
-    pendingCustomer: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      data: {
-        aboutMe: '',
-        address: {
-          streetName: '',
-          city: '',
-          state: '',
-          zip: 0,
-        },
-        birthday: {
-          month: '',
-          day: 0,
-          year: 0,
-        },
-      },
-    },
+    aboutMe: '',
+    streetName: '',
+    city: '',
+    state: '',
+    zip: 0,
+    month: '',
+    day: 0,
+    year: 0,
   },
 };
 
