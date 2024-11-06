@@ -2,31 +2,31 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 
 export const NavbarContainer = styled.div`
-    background-color: #ffffff; /* White background for the navbar */
-    border-radius: 10px; /* Rounded corners */
-    padding: 10px 20px; /* Padding for spacing */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px; /* Margin for spacing from the top */
+    margin-top: 20px;
     width: 40rem;
 `;
 
 export const NavLink = styled(Link)`
-  text-decoration: none; /* Remove underline from links */
-  color: #333; /* Text color */
-  font-weight: bold; /* Bold text */
-  margin: 0 15px; /* Margin between links */
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  margin: 0 15px;
   
   &:hover {
-      color: #007bff; /* Change color on hover */
+      color: #007bff;
   }
 `;
 
 export const HeaderContainer = styled.header`
     display: flex;
-    justify-content: center; /* Space between nav and user icon */
+    justify-content: center;
     align-items: center;
     width: 100%;
 `;

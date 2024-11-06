@@ -4,16 +4,15 @@ import { fetchMainSite } from "./services/site/actions";
 import { getSite } from "./services/site/selectors";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from "./components/header";
+import Home from "./components/pages/home";
 function App() {
   const dispatch = useDispatch();
   const site = useSelector(getSite);
-  // const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    // if (site) {
-    //   setLoaded(true);
-    //   return;
-    // }
+    if (site) {
+      return;
+    }
     dispatch(fetchMainSite());
   }, [dispatch, site]);
 
@@ -21,7 +20,7 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route exact path="/"></Route>
+        <Route exact path="/" Component={Home}></Route>
       </Routes>
     </Router>
   )

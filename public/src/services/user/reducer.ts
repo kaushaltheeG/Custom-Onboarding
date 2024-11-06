@@ -1,10 +1,10 @@
-import { DeepPartial } from "../utils";
 import { ADD_USER_INFO, IUserActions, SET_USER, SET_USERS } from "./actions";
+import { NewUserType } from "./api";
 import IUser from "./model";
 
 
 export interface IUserState {
-  newUser: DeepPartial<IUser>,
+  newUser: NewUserType,
   user: IUser | null,
   users: IUser[],
 }
@@ -16,7 +16,7 @@ const INITIAL_USER_STATE: IUserState = {
     firstName: '',
     lastName: '',
     email: '',
-    passwordHash: '',
+    password: '',
     data: {
       aboutMe: '',
       address: {

@@ -9,9 +9,9 @@ export const COMPONENT_TYPE = {
 export type ComponentType = ObjectValues<typeof COMPONENT_TYPE>;
 
 export const PAGE_PLACEMENT = {
-  two: 'two',
-  three: 'three',
-  none: 'none',
+  two: 2,
+  three: 3,
+  none: 0,
 } as const;
 export type PagePlacementType = ObjectValues<typeof PAGE_PLACEMENT>;
 

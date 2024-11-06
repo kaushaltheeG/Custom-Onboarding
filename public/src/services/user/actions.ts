@@ -1,4 +1,5 @@
 import { DeepPartial } from "../utils";
+import { NewUserType } from "./api";
 import IUser from "./model";
 
 export const SET_USER = 'user/SET_USER';
@@ -29,7 +30,7 @@ export interface IValidateUser {
 }
 
 export interface IAddUserInfo {
-  payload: { user: DeepPartial<IUser> };
+  payload: { user: DeepPartial<IUser> & { password?: string} };
   type: typeof ADD_USER_INFO;
 }
 
@@ -73,7 +74,7 @@ export const setUsers = (users: IUser[]): ISetUsers => {
   };
 };
 
-export const addUserInfo = (user: DeepPartial<IUser>): IAddUserInfo => {
+export const addNewUserInfo = (user: NewUserType): IAddUserInfo => {
   return {
     payload: { user },
     type: ADD_USER_INFO,
@@ -85,3 +86,4 @@ export const insertUser = (): IInsertUser => {
     type: INSERT_USER,
   };
 };
+

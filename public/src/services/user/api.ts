@@ -1,3 +1,4 @@
+import { DeepPartial } from "../utils";
 import IUser from "./model";
 import axios from 'axios';
 
@@ -17,7 +18,8 @@ export const validateUser = async ({
   return data
 };
 
-export const addNewUser = async (newUser: any): Promise<IUser | null> => {
+export type NewUserType = DeepPartial<IUser> & { password?: string };
+export const addNewUser = async (newUser: NewUserType): Promise<IUser | null> => {
   const { data } = await axios.post(`api/user/new`, newUser);
   return data
 };
