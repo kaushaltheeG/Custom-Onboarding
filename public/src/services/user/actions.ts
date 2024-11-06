@@ -35,6 +35,7 @@ export interface IAddUserInfo {
 }
 
 export interface IInsertUser {
+  payload: { navigate: any };
   type: typeof INSERT_USER;
 }
 
@@ -81,8 +82,9 @@ export const addNewUserInfo = (user: INewUserInfo): IAddUserInfo => {
   };
 };
 
-export const insertUser = (): IInsertUser => {
+export const insertUser = (navigate: any): IInsertUser => {
   return {
+    payload: { navigate },
     type: INSERT_USER,
   };
 };

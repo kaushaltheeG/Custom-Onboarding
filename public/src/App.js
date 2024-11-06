@@ -7,6 +7,7 @@ import Header from "./components/header";
 import Home from "./components/pages/Home";
 import Admin from "./components/pages/Admin";
 import Data from "./components/pages/Data";
+
 function App() {
   const dispatch = useDispatch();
   const site = useSelector(getSite);
@@ -22,9 +23,9 @@ function App() {
 		<Router>
 			<Header />
 			<Routes>
-				<Route exact path="/" Component={Home}></Route>
-				<Route exact path="/admin" Component={Admin}></Route>
-				<Route exact path="/data" Component={Data}></Route>
+				<Route exact path="/" element={<Home />}></Route>
+				<Route exact path="/admin" element={<Admin />}></Route>
+				<Route exact path="/data" element={<Data />}></Route>
 			</Routes>
 		</Router>
 	);

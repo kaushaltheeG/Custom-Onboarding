@@ -1,5 +1,5 @@
 import React from "react";
-import { FormContainer, CenteringDiv, ValidationContainer, Form, Divider, Title } from "./styles";
+import { FormContainer, FixedWidth, CenteringDiv, ValidationContainer, Form, Divider, Title, TitleContainer, FlexContainer } from "./styles";
 import Input from "../../ui/Input";
 import RoundedButton from "../../ui/RoundedButton";
 import { useDispatch, useSelector } from "react-redux";
@@ -93,21 +93,25 @@ const Home: React.FC = () => {
   }, [loggedIn, loggedInUser, setEmail]);
 
   return(
-    <>
-    <Title>{!loggedIn && !tiredValidation ? 'Already in the System?' : 'Onboard Customer'}</Title>
-      <CenteringDiv>
-        <FormContainer>
-          {validationForm()}
-        </FormContainer>
-        { error && <ErrorComponent message={error.message}/>}
-        <FormControler
-          onNext={onNext}
-          onPrev={onPrev}
-          onSubmit={onSubmit}
-          currentPage={currentFormPage}
-          />
-      </CenteringDiv>
-    </>
+    <FlexContainer> 
+      <FixedWidth>
+        <TitleContainer>
+          <Title>{!loggedIn && !tiredValidation ? 'Already in the System?' : 'Onboard Customer'}</Title>
+        </TitleContainer>
+        <CenteringDiv>
+          <FormContainer>
+            {validationForm()}
+          </FormContainer>
+          { error && <ErrorComponent message={error.message}/>}
+          <FormControler
+            onNext={onNext}
+            onPrev={onPrev}
+            onSubmit={onSubmit}
+            currentPage={currentFormPage}
+            />
+        </CenteringDiv>
+      </FixedWidth>
+    </FlexContainer>
   
   )
 };

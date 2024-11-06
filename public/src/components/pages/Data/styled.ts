@@ -6,7 +6,7 @@ export const TableContainer = styled.div`
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   max-height: 1000px;
   overflow-y: auto;
-  overflow-x: none;
+  overflow-x: hidden;
   margin: 20px;
 `;
 

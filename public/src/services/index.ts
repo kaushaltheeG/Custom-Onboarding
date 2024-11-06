@@ -4,6 +4,7 @@ import rootReducer, { RootState } from './rootReducer';
 import rootSaga from './rootSaga';
 import { logger } from 'redux-logger';
 import { createBrowserHistory } from 'history';
+import { routerMiddleware } from 'connected-react-router';
 
 export const history = createBrowserHistory();
 
@@ -13,7 +14,7 @@ const configureStore = (): Store<RootState> => {
   const sagaMiddleware = createSagaMiddleware();
 
   // Middleware array
-  const middleware: any[] = [sagaMiddleware];
+  const middleware: any[] = [routerMiddleware(history), sagaMiddleware];
 
   let enhancer;
   if (process.env.REACT_APP_ENVIRONMENT === 'production') {

@@ -5,6 +5,7 @@ import { getCurrentPageMap } from "../services/site/selectors";
 import { IFormActions, setCurrentFormPage, setFormError } from "../services/form/action";
 import { Dispatch } from "redux";
 import { insertUser, IUserActions } from '../services/user/actions';
+import { useNavigate } from "react-router";
 
 const useFormControler = (state: number): {
   onPrev: () => void;
@@ -15,6 +16,7 @@ const useFormControler = (state: number): {
   const newUserInfo = useSelector(getNewUserInfo);
   const currentPageLayoutMap = useSelector(getCurrentPageMap);
   const dispatch = useDispatch<Dispatch<IFormActions | IUserActions>>();
+  const navigate = useNavigate();
   const onPrev = () => {
     if (!stack.length) {
       return;
@@ -42,7 +44,7 @@ const useFormControler = (state: number): {
   }
 
   const onSubmit = () => {
-    dispatch(insertUser());
+    dispatch(insertUser(navigate));
   };
 
   return {

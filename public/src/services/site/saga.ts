@@ -15,17 +15,20 @@ const fetchAndSetMainSite = function* () {
 
 const updateSiteLayoutSage = function* ({ payload }: IUpdateLayoutAction) {
   try {
-    yield put(setSiteError(null));
-    const { layout } = payload;
+    const { layout, navigate } = payload;
     if (!validateNewSiteLayout(layout)) {
       yield put(setSiteError(new Error('Invalid Site Layout, please recheck your values')));
+      return;
     }
     // validate the layout
     const updatedSite: ISite | null = yield call(updateSiteLayout, layout);
     if (!updatedSite) {
       yield put(setSiteError(new Error('Updating Main Site returned null value')));
+      return;
     }
     yield put(setMainSite(updatedSite));
+    yield put(setSiteError(null));
+    navigate('/');
   } catch (e) {
     console.error(e);
     yield put(setSiteError(new Error('Failed api request to update the site layout')))

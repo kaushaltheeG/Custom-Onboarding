@@ -1,5 +1,5 @@
 import { takeEvery, call, put, select } from "redux-saga/effects";
-import { addNewUserInfo, GET_USERS, INSERT_USER, IValidateUser, setUser, setUsers, VALIDATE_USER } from "./actions";
+import { addNewUserInfo, GET_USERS, IInsertUser, INSERT_USER, IValidateUser, setUser, setUsers, VALIDATE_USER } from "./actions";
 import { addNewUser, getUsers, validateUser } from "./api";
 import IUser from "./model";
 import { IState } from "../state";
@@ -35,8 +35,9 @@ const validateUserSaga = function* ({ payload }: IValidateUser) {
   }
 };
 
-const addNewUserSaga = function* () {
+const addNewUserSaga = function* ({ payload }: IInsertUser) {
   try {
+    const { navigate } = payload;
     const state: IState = yield select();
     const newUserInfo = getNewUserInfo(state);
     const loggedIn = isLoggedIn(state);
@@ -51,11 +52,13 @@ const addNewUserSaga = function* () {
     if (!loggedIn) {
       yield put(setUser(newUser));
     }
+    yield put(setFormError(null));
     yield put(addNewUserInfo(INIT_NEW_USER_INFO));
     yield put(setCurrentFormPage(1));
-  } catch (e) {
+    navigate('/data');
+  } catch (e: any) {
     console.error(e);
-    yield put(setFormError(new Error('Failed add user api request')));
+    yield put(setFormError(new Error(e?.response?.data?.error || 'Failed add user api request')));
   }
 }
 

@@ -11,7 +11,7 @@ export interface IGetMainSiteAction {
 }
 
 export interface IUpdateLayoutAction {
-  payload: { layout: ISite['layout'] };
+  payload: { layout: ISite['layout'], navigate: any };
   type: typeof UPDATE_LAYOUT;
 }
 
@@ -38,9 +38,9 @@ export const setMainSite = (site: ISite | null): IGetMainSiteAction => {
   };
 };
 
-export const updateSiteLayout = (layout: ISite['layout']): IUpdateLayoutAction => {
+export const updateSiteLayout = (layout: ISite['layout'], navigate: any): IUpdateLayoutAction => {
   return {
-    payload: { layout },
+    payload: { layout, navigate },
     type: UPDATE_LAYOUT,
   };
 };

@@ -9,12 +9,14 @@ import RoundedButton from "../../ui/RoundedButton";
 import { Dispatch } from "redux";
 import { ISiteActions, updateSiteLayout } from "../../../services/site/actions";
 import ErrorComponent from "../../ui/ErrorComponent";
+import { useNavigate } from "react-router";
 
 const Admin: React.FC = () => {
   const mainSite = useSelector(getSite);
   const { components, updatePage, updateOrder, typeToLabel } = useAdmin(mainSite);
   const dispatch = useDispatch<Dispatch<ISiteActions>>();
   const layoutError = useSelector(getSiteError);
+  const navigate = useNavigate();
   
   const renderOptions = React.useCallback(() => {
     return components.map((component: IComponent) => {
@@ -41,8 +43,9 @@ const Admin: React.FC = () => {
   },[components, updateOrder, updatePage, typeToLabel])
 
   const handleOnClick = React.useCallback(() => {
-    dispatch(updateSiteLayout(components));
-  }, [components, dispatch]);
+    dispatch(updateSiteLayout(components, navigate));
+    // navigate('/');
+  }, [components, dispatch, navigate]);
 
   if (!mainSite) {
     return null;

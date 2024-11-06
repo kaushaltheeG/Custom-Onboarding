@@ -18,15 +18,15 @@ export const Title = styled.span`
 `;
 
 export const FormContainer = styled.div`
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 20px;
-    width: 70rem;
-    height: 40rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+  width: 70rem;
+  height: 30rem;
 
-    display:flex;
+  display:flex;
 `;
 
 export const ValidationContainer = styled.div`
@@ -130,11 +130,29 @@ export const RowAlign = styled.div`
   padding: 10px;
 `;
 
-// export const FlexContainer = styled.div`
-//   display: flex;
-//   width: 100%;
-//   height: 100%;
-// `;
+export const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: auto;
+  padding-left: 50px;
+`;
+
+export const FixedWidth = styled.div`
+  width: 80rem;
+`;
+
+export const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 20px;
+  overflow: hidden;
+`;
+
 
 export const AddressContainer = styled.div`
   display: flex;
