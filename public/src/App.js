@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from "./components/header";
 import Home from "./components/pages/Home";
 import Admin from "./components/pages/Admin";
+import Data from "./components/pages/Data";
 function App() {
   const dispatch = useDispatch();
   const site = useSelector(getSite);
@@ -23,6 +24,7 @@ function App() {
 			<Routes>
 				<Route exact path="/" Component={Home}></Route>
 				<Route exact path="/admin" Component={Admin}></Route>
+				<Route exact path="/data" Component={Data}></Route>
 			</Routes>
 		</Router>
 	);
