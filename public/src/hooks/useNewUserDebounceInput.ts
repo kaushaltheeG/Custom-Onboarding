@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewUserInfo, IUserActions } from '../services/user/actions'; // Adjust the import path as needed
 import { Dispatch } from 'redux';
 import { getNewUserInfo } from '../services/user/selectors';
+import { IFormActions, setFormError } from '../services/form/action';
 
 const useNewUserDebounceInput = (initialState: any, debounceDelay: number) => {
     const [inputState, setInputState] = useState(initialState);
-    const dispatch = useDispatch<Dispatch<IUserActions>>();
+    const dispatch = useDispatch<Dispatch<IUserActions | IFormActions>>();
     const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
     const newUserInfo = useSelector(getNewUserInfo);
 
@@ -41,7 +43,24 @@ const useNewUserDebounceInput = (initialState: any, debounceDelay: number) => {
         };
     }, []);
 
-    return [inputState, handleChange] as const; // Return input state and change handler
+    const checkPassword = React.useCallback((passwordOne: string, passwordTwo: string, formError: Error | null) => {
+      if (!passwordOne.length || !passwordTwo.length) {
+        return; 
+      }
+      if (passwordTwo !== passwordOne && !formError) {
+        dispatch(setFormError(new Error('passwords do not match, please recheck')));
+        return;
+      }
+      if (formError) {
+        dispatch(setFormError(null));
+      }
+    },[dispatch]);
+
+    return {
+      inputState,
+      handleChange,
+      checkPassword,
+    };
 };
 
 export default useNewUserDebounceInput;

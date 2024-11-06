@@ -1,5 +1,5 @@
 import React from "react";
-import { FormContainer, CenteringDiv, ValidationContainer, Form, Divider } from "./styles";
+import { FormContainer, CenteringDiv, ValidationContainer, Form, Divider, Title } from "./styles";
 import Input from "../../ui/Input";
 import RoundedButton from "../../ui/RoundedButton";
 import { useDispatch, useSelector } from "react-redux";
@@ -93,18 +93,22 @@ const Home: React.FC = () => {
   }, [loggedIn, loggedInUser, setEmail]);
 
   return(
-    <CenteringDiv>
-      <FormContainer>
-        {validationForm()}
-      </FormContainer>
-      { error && <ErrorComponent message={error.message}/>}
-      <FormControler
-        onNext={onNext}
-        onPrev={onPrev}
-        onSubmit={onSubmit}
-        currentPage={currentFormPage}
-      />
-    </CenteringDiv>
+    <>
+    <Title>{!loggedIn && !tiredValidation ? 'Already in the System?' : 'Onboard Customer'}</Title>
+      <CenteringDiv>
+        <FormContainer>
+          {validationForm()}
+        </FormContainer>
+        { error && <ErrorComponent message={error.message}/>}
+        <FormControler
+          onNext={onNext}
+          onPrev={onPrev}
+          onSubmit={onSubmit}
+          currentPage={currentFormPage}
+          />
+      </CenteringDiv>
+    </>
+  
   )
 };
 export default Home;

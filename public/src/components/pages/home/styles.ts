@@ -9,6 +9,14 @@ export const CenteringDiv = styled.div`
   justify-content: center;
 `;
 
+export const Title = styled.span`
+  display: block;
+  margin-top: 15px;
+  margin-left: 20px;
+  font-size: 26px;
+  color: #333;
+`;
+
 export const FormContainer = styled.div`
     background-color: #ffffff;
     border-radius: 10px;
@@ -121,6 +129,12 @@ export const RowAlign = styled.div`
   justify-content: space-evenly;
   padding: 10px;
 `;
+
+// export const FlexContainer = styled.div`
+//   display: flex;
+//   width: 100%;
+//   height: 100%;
+// `;
 
 export const AddressContainer = styled.div`
   display: flex;

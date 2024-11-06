@@ -5,7 +5,7 @@ import { getLoggedInUser, getNewUserInfo } from "../../../../services/user/selec
 import useNewUserDebounceInput from "../../../../hooks/useNewUserDebounceInput";
 import DynamicSelect from "../../../ui/DynamicSelect";
 import { BirthdayContainer, ColumnAlign, AddressContainer, StyledLabel, PageTwoAndThreeContainer } from "../styles";
-import { allMonthList, daysInMonthList, stateAcronymList, yearsList } from "../../../../utils";
+import { allMonthList, daysInMonthList, stateAcronymList } from "../../../../utils";
 import Input from "../../../ui/Input";
 
 const PageTwoOrThree: React.FC<{components: string[]}> = ({ components }) => {
@@ -14,19 +14,17 @@ const PageTwoOrThree: React.FC<{components: string[]}> = ({ components }) => {
   const pendingCustomer = React.useMemo(() => (
     currentUser ? currentUser.pendingCustomer : null    
   ), [currentUser]);
-  const yearOptions = React.useMemo(() => {
-    return yearsList;
-  }, [])
-  const [newUser, handleChange] = useNewUserDebounceInput(
+
+  const {inputState: newUser, handleChange} = useNewUserDebounceInput(
       {
         aboutMe: newUserInfo?.aboutMe || pendingCustomer?.data?.aboutMe || '',
         streetName: newUserInfo?.streetName || pendingCustomer?.data?.address?.streetName || '',
         city: newUserInfo?.city || pendingCustomer?.data?.address?.city || '',
         state: newUserInfo?.state || pendingCustomer?.data?.address?.state || stateAcronymList[0],
-        zip:  newUserInfo?.zip || pendingCustomer?.data?.address?.zip || '',
+        zip:  newUserInfo?.zip || pendingCustomer?.data?.address?.zip || 0,
         month: newUserInfo?.month || pendingCustomer?.data?.birthday?.month || allMonthList[0],
-        day: newUserInfo?.day || pendingCustomer?.data?.birthday?.day || daysInMonthList[0],
-        year: newUserInfo?.year || pendingCustomer?.data?.birthday?.year || yearOptions[0],
+        day: newUserInfo?.day || pendingCustomer?.data?.birthday?.day || 0,
+        year: newUserInfo?.year || pendingCustomer?.data?.birthday?.year || 0,
       },
       100 // Debounce delay in milliseconds
   );
@@ -51,27 +49,27 @@ const PageTwoOrThree: React.FC<{components: string[]}> = ({ components }) => {
           <DynamicSelect
             label="Month"
             name="month"
-            value={newUser.month || allMonthList[0]}
+            value={newUser.month}
             options={allMonthList}
             onChange={handleChange}
           />
           <DynamicSelect
             label="Day"
             name="day"
-            value={newUser.day || daysInMonthList[0]}
+            value={newUser.day}
             options={daysInMonthList}
             onChange={handleChange}
           />
           <Input
             label="Year"
             name="year"
-            value={newUser.year || yearOptions[0]}
+            value={newUser.year}
             onChange={handleChange}
           />
         </BirthdayContainer>
       </ColumnAlign>
     );
-  }, [handleChange, newUser.day, newUser.month, newUser.year, yearOptions]);
+  }, [handleChange, newUser.day, newUser.month, newUser.year]);
 
   const renderAddress = useCallback(() => {
     return (
@@ -81,26 +79,26 @@ const PageTwoOrThree: React.FC<{components: string[]}> = ({ components }) => {
           <Input
             label="Street Name"
             name="streetName"
-            value={newUser.streetName || ''}
+            value={newUser.streetName}
             onChange={handleChange}
           />
           <Input
             label="City"
             name="city"
-            value={newUser.city || ''}
+            value={newUser.city}
             onChange={handleChange}
           />
           <DynamicSelect
             label="State"
             name="state"
-            value={newUser.state || stateAcronymList[0]}
+            value={newUser.state}
             options={stateAcronymList}
             onChange={handleChange}
           />
           <Input
             label="Zip"
             name="zip"
-            value={newUser.zip || ''}
+            value={newUser.zip}
             onChange={handleChange}
           />
         </AddressContainer>
