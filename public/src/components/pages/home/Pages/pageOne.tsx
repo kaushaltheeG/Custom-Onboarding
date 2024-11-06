@@ -19,10 +19,9 @@ const PageOne: React.FC = () => {
         firstName: newUserInfo.firstName || pendingCustomer?.firstName || '',
         lastName: newUserInfo.lastName || pendingCustomer?.lastName || '',
       },
-      300 // Debounce delay in milliseconds
+      100 // Debounce delay in milliseconds
   );
   const [passwordTwo, setPasswordTwo] = React.useState(newUserInfo.password || '');
-
 
   return (
     <>

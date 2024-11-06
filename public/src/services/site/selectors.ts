@@ -9,15 +9,15 @@ export const getCurrentPageMap = (state: IState) => {
     return {};
   }
   const pageMap: { [page: number]: string[]} = {
-    0: [],
+    0: new Array(1).fill(null),
     1: ['email', 'password', 'firstName', 'lastName'],
-    2: [],
-    3: [],
+    2: new Array(2).fill(null),
+    3: new Array(2).fill(null),
   };
   for (const component of layout) {
-    const { page, type } = component as IComponent;
+    const { page, type, order } = component as IComponent;
     if (pageMap[page]) {
-      pageMap[page].push(type);
+      pageMap[page][order - 1] = type;
     }
   }
   return pageMap;

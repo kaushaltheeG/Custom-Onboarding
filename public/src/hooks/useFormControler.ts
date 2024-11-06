@@ -14,10 +14,7 @@ const useFormControler = (state: number): {
   const newUserInfo = useSelector(getNewUserInfo);
   const currentPageLayoutMap = useSelector(getCurrentPageMap);
   const dispatch = useDispatch<Dispatch<IFormActions>>();
-
   const onPrev = () => {
-    console.log('stack')
-    console.log(stack)
     if (!stack.length) {
       return;
     }
@@ -34,6 +31,7 @@ const useFormControler = (state: number): {
     // check if field for current page is filled
     if (!checkNewUserInfoIsFilled(newUserInfo, queue[0], currentPageLayoutMap)) {
       // dispatch error
+      console.log('failed check')
       return;
     }
     const current = queue.shift()!;
@@ -55,9 +53,30 @@ const checkNewUserInfoIsFilled = (
   currentPageLayoutMap: {[page: number]: string[]}
 ) => {
   const fieldsToCheck = currentPageLayoutMap[pageNum];
+
   for (const field of fieldsToCheck) {
+    if (!field) {
+      continue;
+    }
     // @ts-ignore
     if (newUserInfo[field]) {
+      continue;
+    }
+
+    if (field === 'address' &&
+      newUserInfo.streetName &&
+      newUserInfo.city &&
+      newUserInfo.state &&
+      newUserInfo.zip
+    ) {
+      continue;
+    }
+
+    if (field === 'birthday' &&
+      newUserInfo.month &&
+      newUserInfo.day &&
+      newUserInfo.year
+    ) {
       continue;
     }
 

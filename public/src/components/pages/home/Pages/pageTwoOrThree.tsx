@@ -4,11 +4,11 @@ import { useSelector } from "react-redux";
 import { getLoggedInUser, getNewUserInfo } from "../../../../services/user/selectors";
 import useNewUserDebounceInput from "../../../../hooks/useNewUserDebounceInput";
 import DynamicSelect from "../../../ui/DynamicSelect";
-import { BirthdayContainer, ColumnAlign, AddressContainer, StyledLabel, PageTwoAndThreeContainer, RowAlign } from "../styles";
+import { BirthdayContainer, ColumnAlign, AddressContainer, StyledLabel, PageTwoAndThreeContainer } from "../styles";
 import { allMonthList, daysInMonthList, stateAcronymList, yearsList } from "../../../../utils";
 import Input from "../../../ui/Input";
 
-const PageTwoOrThree: React.FC = () => {
+const PageTwoOrThree: React.FC<{components: string[]}> = ({ components }) => {
   const newUserInfo = useSelector(getNewUserInfo);
   const currentUser = useSelector(getLoggedInUser);
   const pendingCustomer = React.useMemo(() => (
@@ -108,11 +108,24 @@ const PageTwoOrThree: React.FC = () => {
     )
   }, [handleChange, newUser.city, newUser.state, newUser.streetName, newUser.zip])
 
+  const renderComponents = React.useCallback(() => {
+    return components.map((component) => {
+      switch(component) {
+        case 'aboutMe':
+          return renderAboutMe();
+        case  'address':
+          return renderAddress();
+        case 'birthday':
+          return renderBirthday();
+        default:
+          return null;
+      }
+    })
+  }, [components, renderAboutMe, renderAddress, renderBirthday]);
+
   return (
     <PageTwoAndThreeContainer>
-      {renderAboutMe()}
-      {renderBirthday()}
-      {renderAddress()}
+      {renderComponents()}
     </PageTwoAndThreeContainer>
   );
 };

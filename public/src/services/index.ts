@@ -22,7 +22,6 @@ const configureStore = (): Store<RootState> => {
   } else {
     // Development: add logger and compose with Redux DevTools
     middleware.push(logger);
-    console.log('in here')
     const composeEnhancers =
       (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

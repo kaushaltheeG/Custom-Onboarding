@@ -12,7 +12,6 @@ const useNewUserDebounceInput = (initialState: any, debounceDelay: number) => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        console.log(`name: ${name} value: ${value}`)
         setInputState((prev: {any: any}) => ({
             ...prev,
             [name]: value,

@@ -11,6 +11,7 @@ import FormControler from "./FormControler";
 import useFormControler from "../../../hooks/useFormControler";
 import { getCurrentFormPage } from "../../../services/form/selector";
 import PageTwoOrThree from "./Pages/pageTwoOrThree";
+import { getCurrentPageMap } from "../../../services/site/selectors";
 
 
 const Home: React.FC = () => {
@@ -22,8 +23,8 @@ const Home: React.FC = () => {
   const loggedInUser = useSelector(getLoggedInUser);
   const loggedIn = useSelector(isLoggedIn);
   const currentFormPage = useSelector(getCurrentFormPage);
+  const currentFormPageLayoutMap = useSelector(getCurrentPageMap);
   const { onPrev, onNext } = useFormControler(currentFormPage);
-
 
   const handleSubmit = React.useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,7 +36,6 @@ const Home: React.FC = () => {
     }
 
     if (!tiredValidation) {
-      console.log(`email: ${email} passwordOne: ${passwordOne}`)
       dispatch(validateUser(email, passwordOne));
       setTriedValidation(true);
       return;
@@ -72,16 +72,16 @@ const Home: React.FC = () => {
     }
     switch(currentFormPage) {
       case 1:
-        return  <PageTwoOrThree />//<PageOne />;
+        return <PageOne />;
       case 2:
-        return;
+        return <PageTwoOrThree components={currentFormPageLayoutMap[currentFormPage]} />;
       case 3:
-        return;
+        return <PageTwoOrThree  components={currentFormPageLayoutMap[currentFormPage]}/>;
       default:
         console.error(`current page ${currentFormPage} not found`)
         return;
     }
-  }, [tiredValidation, errors, handleSubmit, passwordOne, email, currentFormPage]);
+  }, [tiredValidation, errors, handleSubmit, passwordOne, email, currentFormPage, currentFormPageLayoutMap]);
 
   React.useEffect(() => {
     if (loggedIn && loggedInUser) {
