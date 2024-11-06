@@ -5,7 +5,7 @@ import IUser from "./model";
 import { IState } from "../state";
 import { getNewUserInfo, isLoggedIn } from "./selectors";
 import { createUserFromInput } from "./utils";
-import { setCurrentFormPage } from "../form/action";
+import { setCurrentFormPage, setFormError } from "../form/action";
 import { INIT_NEW_USER_INFO } from "./reducer";
 
 const fetchAndSetUsersSaga = function* () {
@@ -14,7 +14,6 @@ const fetchAndSetUsersSaga = function* () {
     yield put(setUsers(users));
   } catch (error) {
     console.error(error);
-    // show error model or add to error state
   }
 };
 
@@ -23,7 +22,6 @@ const validateUserSaga = function* ({ payload }: IValidateUser) {
   // add error checks for email and password
   try {
     const validUser: IUser | null = yield call(validateUser, { email, password});
-    console.log(validUser);
     if (!validUser) {
       const state: IState = yield select();
       const newUserInfo = getNewUserInfo(state);
@@ -31,8 +29,9 @@ const validateUserSaga = function* ({ payload }: IValidateUser) {
       return;
     }
     yield put(setUser(validUser));
-  } catch (error) {
-    console.error(error);
+  } catch (e) {
+    console.error(e);
+    yield put(setFormError(new Error('Failed validating the user')))
   }
 };
 
@@ -45,8 +44,7 @@ const addNewUserSaga = function* () {
 
     const newUser : IUser | null = yield call(addNewUser, userData);
     if (!newUser) {
-      // error handle
-      console.error('Failed to create user')
+      yield put(setFormError(new Error('New user failed, double check values')));
       return;
     }
 
@@ -55,8 +53,9 @@ const addNewUserSaga = function* () {
     }
     yield put(addNewUserInfo(INIT_NEW_USER_INFO));
     yield put(setCurrentFormPage(1));
-  } catch (error) {
-    console.error(error);
+  } catch (e) {
+    console.error(e);
+    yield put(setFormError(new Error('Failed add user api request')));
   }
 }
 

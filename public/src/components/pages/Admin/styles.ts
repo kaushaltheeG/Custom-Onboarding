@@ -38,4 +38,5 @@ export const ButtonContainer = styled.div`
   width: 100;
   align-items: center;
   justify-content: flex-end;
+  gap: 5px;
 `;

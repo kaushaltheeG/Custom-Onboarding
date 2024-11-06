@@ -22,11 +22,11 @@ const PageTwoOrThree: React.FC<{components: string[]}> = ({ components }) => {
         aboutMe: newUserInfo?.aboutMe || pendingCustomer?.data?.aboutMe || '',
         streetName: newUserInfo?.streetName || pendingCustomer?.data?.address?.streetName || '',
         city: newUserInfo?.city || pendingCustomer?.data?.address?.city || '',
-        state: newUserInfo?.state || pendingCustomer?.data?.address?.state || '',
+        state: newUserInfo?.state || pendingCustomer?.data?.address?.state || stateAcronymList[0],
         zip:  newUserInfo?.zip || pendingCustomer?.data?.address?.zip || '',
-        month: newUserInfo?.month || pendingCustomer?.data?.birthday?.month || '',
-        day: newUserInfo?.day || pendingCustomer?.data?.birthday?.day || '',
-        year: newUserInfo?.year || pendingCustomer?.data?.birthday?.year || '',
+        month: newUserInfo?.month || pendingCustomer?.data?.birthday?.month || allMonthList[0],
+        day: newUserInfo?.day || pendingCustomer?.data?.birthday?.day || daysInMonthList[0],
+        year: newUserInfo?.year || pendingCustomer?.data?.birthday?.year || yearOptions[0],
       },
       100 // Debounce delay in milliseconds
   );

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getNewUserInfo } from "../services/user/selectors";
 import { INewUserInfo } from "../services/user/model";
 import { getCurrentPageMap } from "../services/site/selectors";
-import { IFormActions, setCurrentFormPage } from "../services/form/action";
+import { IFormActions, setCurrentFormPage, setFormError } from "../services/form/action";
 import { Dispatch } from "redux";
 import { insertUser, IUserActions } from '../services/user/actions';
 
@@ -31,13 +31,13 @@ const useFormControler = (state: number): {
     }
     // check if field for current page is filled
     if (!checkNewUserInfoIsFilled(newUserInfo, queue[0], currentPageLayoutMap)) {
-      // dispatch error
-      console.log('failed check')
+      dispatch(setFormError(new Error('please make sure every field is filled out')))
       return;
     }
     const current = queue.shift()!;
     stack.push(current);
     dispatch(setCurrentFormPage(queue[0]));
+    dispatch(setFormError(null));
     return;
   }
 

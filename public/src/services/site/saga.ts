@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects"
 import { getMainSite, updateSiteLayout } from "./api"
-import { FETCH_MAIN_SITE, IUpdateLayoutAction, setMainSite, UPDATE_LAYOUT } from "./actions";
+import { FETCH_MAIN_SITE, IUpdateLayoutAction, setMainSite, setSiteError, UPDATE_LAYOUT } from "./actions";
 import ISite from "./model";
 import { validateNewSiteLayout } from "./utils";
 
@@ -8,25 +8,27 @@ const fetchAndSetMainSite = function* () {
   try {
     const mainSite: ISite | null = yield call(getMainSite);
     yield put(setMainSite(mainSite));
-  } catch (error) {
-    console.error(error)
+  } catch (e) {
+    console.error(e)
   }
 };
 
 const updateSiteLayoutSage = function* ({ payload }: IUpdateLayoutAction) {
   try {
+    yield put(setSiteError(null));
     const { layout } = payload;
     if (!validateNewSiteLayout(layout)) {
-      throw new Error('Invalid Site Layout, please recheck your values');
+      yield put(setSiteError(new Error('Invalid Site Layout, please recheck your values')));
     }
     // validate the layout
     const updatedSite: ISite | null = yield call(updateSiteLayout, layout);
     if (!updatedSite) {
-      throw new Error('Updating Main Site returned null value');
+      yield put(setSiteError(new Error('Updating Main Site returned null value')));
     }
     yield put(setMainSite(updatedSite));
-  } catch (error) {
-    console.log(error)
+  } catch (e) {
+    console.error(e);
+    yield put(setSiteError(new Error('Failed api request to update the site layout')))
   }
 }
 

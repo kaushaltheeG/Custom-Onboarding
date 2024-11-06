@@ -24,3 +24,5 @@ export const getCurrentPageMap = (state: IState) => {
 }
 
 export const getAdminLayoutChanges = (state: IState) => state.site.admin;
+
+export const getSiteError = (state: IState) => state.site.error;

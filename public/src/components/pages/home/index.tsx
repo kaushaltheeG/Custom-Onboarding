@@ -9,9 +9,10 @@ import { getLoggedInUser, isLoggedIn } from '../../../services/user/selectors';
 import PageOne from "./Pages/pageOne";
 import FormControler from "./FormControler";
 import useFormControler from "../../../hooks/useFormControler";
-import { getCurrentFormPage } from "../../../services/form/selector";
+import { getCurrentFormPage, getFormError } from "../../../services/form/selector";
 import PageTwoOrThree from "./Pages/pageTwoOrThree";
 import { getCurrentPageMap } from "../../../services/site/selectors";
+import ErrorComponent from "../../ui/ErrorComponent";
 
 
 const Home: React.FC = () => {
@@ -25,6 +26,7 @@ const Home: React.FC = () => {
   const currentFormPage = useSelector(getCurrentFormPage);
   const currentFormPageLayoutMap = useSelector(getCurrentPageMap);
   const { onPrev, onNext, onSubmit } = useFormControler(currentFormPage);
+  const error = useSelector(getFormError);
 
   const handleSubmit = React.useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -95,6 +97,7 @@ const Home: React.FC = () => {
       <FormContainer>
         {validationForm()}
       </FormContainer>
+      { error && <ErrorComponent message={error.message}/>}
       <FormControler
         onNext={onNext}
         onPrev={onPrev}
