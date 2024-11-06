@@ -1,31 +1,31 @@
 import { ADD_USER_INFO, IUserActions, SET_USER, SET_USERS } from "./actions";
-import { INewUser } from "./api";
+import { INewUserInfo } from "./model";
 import IUser from "./model";
 
 
 export interface IUserState {
-  newUser: INewUser,
+  newUser: INewUserInfo,
   user: IUser | null,
   users: IUser[],
 }
-
+export const INIT_NEW_USER_INFO = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  aboutMe: '',
+  streetName: '',
+  city: '',
+  state: '',
+  zip: 0,
+  month: '',
+  day: 0,
+  year: 0,
+}
 const INITIAL_USER_STATE: IUserState = {
   user: null,
   users: [],
-  newUser: {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    aboutMe: '',
-    streetName: '',
-    city: '',
-    state: '',
-    zip: 0,
-    month: '',
-    day: 0,
-    year: 0,
-  },
+  newUser: INIT_NEW_USER_INFO,
 };
 
 const userReducer = (state: IUserState = INITIAL_USER_STATE, action: IUserActions) => {

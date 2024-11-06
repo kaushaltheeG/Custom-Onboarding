@@ -1,19 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getNewUserInfo } from "../services/user/selectors";
-import { INewUser } from "../services/user/api";
+import { INewUserInfo } from "../services/user/model";
 import { getCurrentPageMap } from "../services/site/selectors";
 import { IFormActions, setCurrentFormPage } from "../services/form/action";
 import { Dispatch } from "redux";
+import { insertUser, IUserActions } from '../services/user/actions';
 
 const useFormControler = (state: number): {
   onPrev: () => void;
   onNext: () => void;
-  // onSubmit: () => void;
+  onSubmit: () => void;
 } => {
   const { stack, queue } = initalizeStackAndQueue(state);
   const newUserInfo = useSelector(getNewUserInfo);
   const currentPageLayoutMap = useSelector(getCurrentPageMap);
-  const dispatch = useDispatch<Dispatch<IFormActions>>();
+  const dispatch = useDispatch<Dispatch<IFormActions | IUserActions>>();
   const onPrev = () => {
     if (!stack.length) {
       return;
@@ -40,15 +41,19 @@ const useFormControler = (state: number): {
     return;
   }
 
-  // const onSubmit
+  const onSubmit = () => {
+    dispatch(insertUser());
+  };
+
   return {
     onPrev,
     onNext,
+    onSubmit,
   };
 };
 
 const checkNewUserInfoIsFilled = (
-  newUserInfo: INewUser,
+  newUserInfo: INewUserInfo,
   pageNum: number,
   currentPageLayoutMap: {[page: number]: string[]}
 ) => {

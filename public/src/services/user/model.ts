@@ -18,7 +18,7 @@ export interface IUserData {
   birthday: IBirthday;
 }
 
-export type ICreateUser = Omit<IUser, 'passwordHash'> & {
+export type ICreateUser = Omit<IUser, 'passwordHash' | '_id' | 'created'> & {
   password: string;
 };
 
@@ -38,3 +38,18 @@ interface IUser {
   },
 }
 export default IUser;
+
+export interface INewUserInfo {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  aboutMe: string;
+  streetName: string;
+  city: string;
+  state: string;
+  zip: number;
+  month: string;
+  day: number;
+  year: number;
+}

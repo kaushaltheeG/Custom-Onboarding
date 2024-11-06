@@ -17,14 +17,14 @@ import { getCurrentPageMap } from "../../../services/site/selectors";
 const Home: React.FC = () => {
   const [email, setEmail] = React.useState('');
   const [passwordOne, setPasswordOne] = React.useState('');
-  const [tiredValidation, setTriedValidation] = React.useState(true);
+  const [tiredValidation, setTriedValidation] = React.useState(false);
   const [errors, setErrors] = React.useState('');
   const dispatch = useDispatch<Dispatch<IUserActions>>();
   const loggedInUser = useSelector(getLoggedInUser);
   const loggedIn = useSelector(isLoggedIn);
   const currentFormPage = useSelector(getCurrentFormPage);
   const currentFormPageLayoutMap = useSelector(getCurrentPageMap);
-  const { onPrev, onNext } = useFormControler(currentFormPage);
+  const { onPrev, onNext, onSubmit } = useFormControler(currentFormPage);
 
   const handleSubmit = React.useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -98,7 +98,7 @@ const Home: React.FC = () => {
       <FormControler
         onNext={onNext}
         onPrev={onPrev}
-        onSubmit={() => {}}
+        onSubmit={onSubmit}
         currentPage={currentFormPage}
       />
     </CenteringDiv>
