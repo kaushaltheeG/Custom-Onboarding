@@ -23,6 +23,13 @@ const validateUserSaga = function* ({ payload }: IValidateUser) {
   // add error checks for email and password
   try {
     const validUser: IUser | null = yield call(validateUser, { email, password});
+    console.log(validUser);
+    if (!validUser) {
+      const state: IState = yield select();
+      const newUserInfo = getNewUserInfo(state);
+      yield put(addNewUserInfo({ ...newUserInfo, email }));
+      return;
+    }
     yield put(setUser(validUser));
   } catch (error) {
     console.error(error);

@@ -12,12 +12,17 @@ const PageOne: React.FC = () => {
     currentUser ? currentUser.pendingCustomer : null    
   ), [currentUser]);
 
+  const initialEmail = newUserInfo.email || pendingCustomer?.email || '';
+  const initialPassword = newUserInfo.password || '';
+  const initialFirstName = newUserInfo.firstName || pendingCustomer?.firstName || '';
+  const initialLastName = newUserInfo.lastName || pendingCustomer?.lastName || '';
+
   const [newUser, handleChange] = useNewUserDebounceInput(
       {
-        email: newUserInfo.email || pendingCustomer?.email || '',
-        password: newUserInfo.password || '',
-        firstName: newUserInfo.firstName || pendingCustomer?.firstName || '',
-        lastName: newUserInfo.lastName || pendingCustomer?.lastName || '',
+        email: initialEmail,
+        password: initialPassword,
+        firstName: initialFirstName,
+        lastName: initialLastName,
       },
       100 // Debounce delay in milliseconds
   );

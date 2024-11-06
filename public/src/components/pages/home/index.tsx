@@ -35,15 +35,15 @@ const Home: React.FC = () => {
       return;
     }
 
-    if (!tiredValidation) {
+    if (!tiredValidation && !loggedIn) {
       dispatch(validateUser(email, passwordOne));
       setTriedValidation(true);
       return;
     }
-  },[dispatch, email, passwordOne, tiredValidation]);
+  },[dispatch, email, passwordOne, tiredValidation, loggedIn]);
 
   const validationForm = React.useCallback(() => {
-    if (!tiredValidation) {
+    if (!loggedIn && !tiredValidation) {
       return (
         <>
           <ValidationContainer>
@@ -81,7 +81,7 @@ const Home: React.FC = () => {
         console.error(`current page ${currentFormPage} not found`)
         return;
     }
-  }, [tiredValidation, errors, handleSubmit, passwordOne, email, currentFormPage, currentFormPageLayoutMap]);
+  }, [tiredValidation, errors, handleSubmit, passwordOne, email, loggedIn, currentFormPage, currentFormPageLayoutMap]);
 
   React.useEffect(() => {
     if (loggedIn && loggedInUser) {
