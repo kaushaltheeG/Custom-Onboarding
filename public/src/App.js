@@ -4,7 +4,8 @@ import { fetchMainSite } from "./services/site/actions";
 import { getSite } from "./services/site/selectors";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from "./components/header";
-import Home from "./components/pages/home";
+import Home from "./components/pages/Home";
+import Admin from "./components/pages/Admin";
 function App() {
   const dispatch = useDispatch();
   const site = useSelector(getSite);
@@ -17,13 +18,14 @@ function App() {
   }, [dispatch, site]);
 
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route exact path="/" Component={Home}></Route>
-      </Routes>
-    </Router>
-  )
+		<Router>
+			<Header />
+			<Routes>
+				<Route exact path="/" Component={Home}></Route>
+				<Route exact path="/admin" Component={Admin}></Route>
+			</Routes>
+		</Router>
+	);
 }
 
 export default App;

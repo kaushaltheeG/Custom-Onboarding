@@ -1,4 +1,4 @@
-import { SET_MAIN_SITE, ISiteActions, UPDATE_LAYOUT } from "./actions";
+import { SET_MAIN_SITE, ISiteActions } from "./actions";
 import ISite, { IComponent } from "./model";
 
 export interface ISiteState {
@@ -18,12 +18,6 @@ const siteReducer = (state: ISiteState = INITIAL_SITE_STATE, action: ISiteAction
       return {
         ...state,
         data: site,
-      };
-    case UPDATE_LAYOUT:
-      const { layout } = action.payload;
-      return {
-        ...state,
-        admin: layout,
       };
     default:
       return state;

@@ -90,8 +90,6 @@ const checkNewUserInfoIsFilled = (
   return true;
 }
 
-
-
 const initalizeStackAndQueue = (state: number): {
   stack: number[],
   queue: number[],
@@ -108,9 +106,5 @@ const initalizeStackAndQueue = (state: number): {
   }
   return { stack, queue };
 };
-
-
-
-
 
 export default useFormControler;

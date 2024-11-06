@@ -9,7 +9,7 @@ export const getCurrentPageMap = (state: IState) => {
     return {};
   }
   const pageMap: { [page: number]: string[]} = {
-    0: new Array(1).fill(null),
+    0: new Array(2).fill(null),
     1: ['email', 'password', 'firstName', 'lastName'],
     2: new Array(2).fill(null),
     3: new Array(2).fill(null),

@@ -5,7 +5,7 @@ import { SelectContainer, StyledLabel, StyledSelect } from './styled';
 interface DynamicSelectProps {
   label: string;
   options: string[] | number[];
-  value: string;
+  value: string | number;
   name: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }

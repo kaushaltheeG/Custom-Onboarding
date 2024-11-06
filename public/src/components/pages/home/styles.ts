@@ -18,8 +18,7 @@ export const FormContainer = styled.div`
     width: 70rem;
     height: 40rem;
 
-    display: flex;
-
+    display:flex;
 `;
 
 export const ValidationContainer = styled.div`
