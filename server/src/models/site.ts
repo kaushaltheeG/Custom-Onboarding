@@ -2,6 +2,7 @@ import assert from "assert";
 import ISite, { isValidSiteLayout } from "../interfaces/models/ISite";
 import Base from "./Base";
 
+
 const AVAILABLE_SITE_COMPONENTS = 3;
 
 class Site extends Base<ISite> {
