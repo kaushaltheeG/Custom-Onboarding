@@ -2,7 +2,7 @@ import {isValidPlainObject } from '../utils/validations';
 import IModel from "../interfaces/models/IModel";
 import assert from 'assert';
 
-export default abstract class Model<T = {}> {
+export default abstract class Base<T = {}> {
   readonly _id!: string;
   private _created: number;
 

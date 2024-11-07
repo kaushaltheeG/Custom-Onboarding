@@ -1,9 +1,9 @@
 import assert from "assert";
 import IUser, { isValidPendingCustomer } from "../interfaces/models/IUser"; // isValidUserData
-import Model from "./Base";
+import Base from "./Base";
 import { isValidEmail } from "../utils/validations";
 
-class User extends Model<IUser> {
+class User extends Base<IUser> {
   private _firstName!: IUser['firstName'];
   private _lastName!: IUser['lastName'];
   private _email!: IUser['email'];

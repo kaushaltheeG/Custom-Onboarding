@@ -1,10 +1,10 @@
 import assert from "assert";
 import ISite, { isValidSiteLayout } from "../interfaces/models/ISite";
-import Model from "./Base";
+import Base from "./Base";
 
 const AVAILABLE_SITE_COMPONENTS = 3;
 
-class Site extends Model<ISite> {
+class Site extends Base<ISite> {
   private _name!: ISite['name'];
   private _layout!: ISite['layout'];
 

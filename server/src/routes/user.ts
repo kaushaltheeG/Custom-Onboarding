@@ -2,13 +2,14 @@ import Router from 'koa-router';
 import UserService from '../services/UserService';
 import User from '../models/User';
 import { Db } from 'mongodb';
+import { Context } from 'koa';
 
 const createUserRouter = (db: Db) => {
   const userCollectionName = User.name.toLowerCase();
   const userService = new UserService(db.collection(userCollectionName));
   const userRouter = new Router({ prefix: '/user' });
   
-  userRouter.get('/all', async (ctx) => {
+  userRouter.get('/all', async (ctx: Context) => {
     try {
       const users = await userService.getUsers();
       ctx.body = users;
@@ -19,7 +20,7 @@ const createUserRouter = (db: Db) => {
     }
   });
   
-  userRouter.post('/validate', async (ctx) => {
+  userRouter.post('/validate', async (ctx: Context) => {
     try {
       const { email, password } = ctx.request.body as { email: string, password: string };
       if (!email || typeof email !== 'string') {
@@ -44,7 +45,7 @@ const createUserRouter = (db: Db) => {
     }
   });
   
-  userRouter.post('/new', async (ctx) => {
+  userRouter.post('/new', async (ctx: Context) => {
     try {
       const newUser = await userService.insertUser(ctx.request.body as any);
       ctx.body = newUser;

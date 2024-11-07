@@ -26,7 +26,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": ["src/**/*.ts", "decs.d.ts"],           // Look for TypeScript files inside `server/src`
+  "include": ["src/**/*.ts", "src/decs.d.ts"],           // Look for TypeScript files inside `server/src`
   "exclude": [
     "node_modules",                     // Exclude `node_modules` in the server directory
     "dist",                             // Exclude `dist` output directory

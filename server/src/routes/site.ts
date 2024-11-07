@@ -2,6 +2,7 @@ import Router from 'koa-router';
 import Site from '../models/Site';
 import SiteService from '../services/SiteService';
 import { Db } from 'mongodb';
+import { Context } from 'koa';
 
 const createSiteRouter = (db: Db) => {
   const siteCollectionName = Site.name.toLowerCase();
@@ -9,7 +10,7 @@ const createSiteRouter = (db: Db) => {
   const siteRouter = new Router({ prefix: '/site' });
   
   // used to get the main site document
-  siteRouter.get('/main', async (ctx) => {
+  siteRouter.get('/main', async (ctx: Context) => {
     try {
       const site = await siteService.getSite();
       ctx.body = site;
@@ -20,7 +21,7 @@ const createSiteRouter = (db: Db) => {
     }
   });
   
-  siteRouter.put('/layout', async (ctx) => {
+  siteRouter.put('/layout', async (ctx: Context) => {
     try {
       const site = await siteService.updateLayout(ctx.request.body as any);
       ctx.body = site;
