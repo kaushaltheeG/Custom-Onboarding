@@ -6,6 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server-install": "cd server && yarn install",
     "server": "cd server && yarn start",
+    "server-skip-build": "cd server && yarn serve",
     "server-build": "cd server && yarn install && yarn build",
     "public-install": "cd public && yarn install",
     "public": "cd public && yarn start",

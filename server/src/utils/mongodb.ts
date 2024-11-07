@@ -6,6 +6,10 @@ dotenv.config()
 const uri = process.env.MONGO_URI || '';
 const dbName = process.env.MONGO_DB_NAME;
 
+if (!uri) {
+  throw new Error("MONGO_URI is not set");
+}
+
 let connectedDatabase: Db | null = null;
 
 // Connect to the mongo database
