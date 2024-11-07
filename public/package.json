@@ -36,12 +36,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -59,6 +53,5 @@
     "@types/react-dom": "^18.3.1",
     "redux-logger": "^3.0.6",
     "typescript": "^5.6.3"
-  },
-  "proxy": "http://localhost:5000"
+  }
 }

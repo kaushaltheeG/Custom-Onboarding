@@ -4,6 +4,7 @@ import { connectDB } from './utils/mongodb';
 import dotenv from 'dotenv';
 import createSiteRouter from './routes/site';
 import createUserRouter from './routes/user';
+import cors from '@koa/cors';
 
 dotenv.config()
 
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 5000;
 // Connect to MongoDB
 connectDB().then((db) => {
   // Middleware
+  app.use(cors());
   app.use(bodyParser());
 
   // Routes
