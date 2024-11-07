@@ -24,7 +24,7 @@ services:
 
   - name: frontend
     type: web
-    runtime: node
+    runtime: static
     buildCommand: yarn public-build
     publishDirectory: ./public/build
     envVars:
