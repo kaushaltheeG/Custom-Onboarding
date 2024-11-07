@@ -1,5 +1,5 @@
 import { Collection } from "mongodb";
-import Site from "../models/Site";
+import Site from "../models/site";
 import ISiteService from "../interfaces/services/ISiteService";
 import ISite, { IComponent } from "../interfaces/models/ISite";
 import assert from "assert";

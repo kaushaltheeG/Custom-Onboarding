@@ -1,6 +1,6 @@
 import assert from "assert";
 import IUser, { isValidPendingCustomer } from "../interfaces/models/IUser"; // isValidUserData
-import Base from "./Base";
+import Base from "./base";
 import { isValidEmail } from "../utils/validations";
 
 class User extends Base<IUser> {

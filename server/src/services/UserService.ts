@@ -1,6 +1,6 @@
 import { Collection } from "mongodb";
 import IUserService from "../interfaces/services/IUserService";
-import User from "../models/User";
+import User from "../models/user";
 import IUser, { ICreateUser } from "../interfaces/models/IUser";
 import assert from "assert";
 import crypto from 'crypto';

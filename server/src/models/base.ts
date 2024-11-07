@@ -1,4 +1,4 @@
-import {isValidPlainObject } from '../utils/validations';
+import { isValidPlainObject } from '../utils/validations';
 import IModel from "../interfaces/models/IModel";
 import assert from 'assert';
 

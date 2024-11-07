@@ -1,5 +1,5 @@
 import Router from 'koa-router';
-import Site from '../models/Site';
+import Site from '../models/site';
 import SiteService from '../services/SiteService';
 import { Db } from 'mongodb';
 import { Context } from 'koa';

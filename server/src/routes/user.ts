@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 import UserService from '../services/UserService';
-import User from '../models/User';
+import User from '../models/user';
 import { Db } from 'mongodb';
 import { Context } from 'koa';
 
