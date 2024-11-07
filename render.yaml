@@ -33,4 +33,3 @@ services:
       - key: REACT_APP_ENVIRONMENT
         value: development
     plan: free
-    region: ohio
