@@ -1,15 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMainSite } from "./services/site/actions";
+import { fetchMainSite, ISiteActions } from "./services/site/actions";
 import { getSite } from "./services/site/selectors";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from "./components/header";
 import Home from "./components/pages/Home";
 import Admin from "./components/pages/Admin";
 import Data from "./components/pages/Data";
+import { Dispatch } from "redux";
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<Dispatch<ISiteActions>>();
   const site = useSelector(getSite);
 
   useEffect(() => {
@@ -23,9 +24,9 @@ function App() {
 		<Router>
 			<Header />
 			<Routes>
-				<Route exact path="/" element={<Home />}></Route>
-				<Route exact path="/admin" element={<Admin />}></Route>
-				<Route exact path="/data" element={<Data />}></Route>
+				<Route path="/admin" element={<Admin />}></Route>
+				<Route path="/data" element={<Data />}></Route>
+				<Route path="/" element={<Home />}></Route>
 			</Routes>
 		</Router>
 	);

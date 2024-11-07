@@ -14,7 +14,6 @@ import PageTwoOrThree from "./Pages/pageTwoOrThree";
 import { getCurrentPageMap } from "../../../services/site/selectors";
 import ErrorComponent from "../../ui/ErrorComponent";
 
-
 const Home: React.FC = () => {
   const [email, setEmail] = React.useState('');
   const [passwordOne, setPasswordOne] = React.useState('');
