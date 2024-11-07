@@ -6,10 +6,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server-install": "cd server && yarn install",
     "server": "cd server && yarn start",
+    "server-build": "cd server && yarn build",
     "public-install": "cd public && yarn install",
     "public": "cd public && yarn start",
     "public-build": "cd public && yarn install && yarn build ",
-    "build": "yarn run server-install && yarn run public-install && yarn run public-build"
+    "build": "yarn run server-install && yarn run server-install && yarn run public-install && yarn run public-build",
+    "start": "yarn run server & yarn run public"
   },
   "repository": {
     "type": "git",
