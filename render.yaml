@@ -26,7 +26,7 @@ services:
     type: web
     runtime: static
     buildCommand: yarn public-build
-    publishDirectory: ./public/build
+    staticPublishPath: ./public/build
     envVars:
       - key: REACT_APP_API_URL
         value: https://backend.onrender.com
