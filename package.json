@@ -1,7 +1,7 @@
 {
-  "name": "viewfinder",
+  "name": "customer-onboarding",
   "version": "1.0.0",
-  "description": "An app for photographers to find the best spots in California to capture great photos.",
+  "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server-install": "cd server && yarn install",
