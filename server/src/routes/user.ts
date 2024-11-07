@@ -2,14 +2,13 @@ import Router from 'koa-router';
 import UserService from '../services/UserService';
 import User from '../models/user';
 import { Db } from 'mongodb';
-import { Context } from 'koa';
 
 const createUserRouter = (db: Db) => {
   const userCollectionName = User.name.toLowerCase();
   const userService = new UserService(db.collection(userCollectionName));
   const userRouter = new Router({ prefix: '/user' });
   
-  userRouter.get('/all', async (ctx: Context) => {
+  userRouter.get('/all', async (ctx: any) => {
     try {
       const users = await userService.getUsers();
       ctx.body = users;
@@ -20,9 +19,9 @@ const createUserRouter = (db: Db) => {
     }
   });
   
-  userRouter.post('/validate', async (ctx: Context) => {
+  userRouter.post('/validate', async (ctx: any) => {
     try {
-      const { email, password } = ctx.request.body as { email: string, password: string };
+      const { email, password } = ctx.request.body;
       if (!email || typeof email !== 'string') {
         ctx.throw(400, 'email is required for request and must be a string');
       }
@@ -45,9 +44,9 @@ const createUserRouter = (db: Db) => {
     }
   });
   
-  userRouter.post('/new', async (ctx: Context) => {
+  userRouter.post('/new', async (ctx: any) => {
     try {
-      const newUser = await userService.insertUser(ctx.request.body as any);
+      const newUser = await userService.insertUser(ctx.request.body);
       ctx.body = newUser;
       ctx.status = 200;
     } catch (error) {
