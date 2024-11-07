@@ -3,7 +3,7 @@ databases:
     plan: free
 
 services:
-  - name: server
+  - name: backend
     type: web
     runtime: node
     buildCommand: cd server && yarn install
@@ -22,10 +22,10 @@ services:
     plan: free
     region: ohio
 
-  - name: public
+  - name: frontend
     type: web
     buildCommand: cd public && yarn build
-    publishDirectory: ./public/build
+    startCommand: cd public && yarn start
     envVars:
       - key: REACT_APP_API_URL
         value: https://backend.onrender.com
