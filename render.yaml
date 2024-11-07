@@ -6,8 +6,8 @@ services:
   - name: backend
     type: web
     runtime: node
-    buildCommand: yarn install && cd backend && yarn install
-    startCommand: yarn start
+    buildCommand: cd server && yarn install
+    startCommand: cd server && yarn start
     envVars:
       - key: MONGO_URI
         value: 'mongodb+srv://kzk:a44ZOWZgqw07cu6k@development.a3egm.mongodb.net/?retryWrites=true&w=majority&appName=development'
@@ -17,20 +17,19 @@ services:
         value: development
       - key: PORT
         value: 5000
-    env:
       - key: NODE_ENV
         value: production
     plan: free
-    region: oregon
+    region: ohio
 
   - name: frontend
     type: web
-    buildCommand: yarn install && cd frontend && yarn build
-    publishDirectory: frontend/build
+    buildCommand: cd public && yarn build
+    publishDirectory: ./public/build
     env:
       - key: REACT_APP_API_URL
         value: https://backend.onrender.com
       - key: REACT_APP_ENVIRONMENT
         value: development
     plan: free
-    region: oregon
+    region: ohio
