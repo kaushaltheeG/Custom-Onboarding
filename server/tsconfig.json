@@ -21,7 +21,7 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "types": ["node"],
-    "typeRoots": [ "./node_modules/@types", "../node_modules/@types", "../../node_modules/@types" ],
+    "typeRoots": ["node_modules/@type"],
     "useUnknownInCatchVariables": false
   },
   "include": ["src/**/*.ts"],           // Look for TypeScript files inside `server/src`
