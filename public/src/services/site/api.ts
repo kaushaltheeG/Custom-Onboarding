@@ -3,7 +3,6 @@ import ISite from "./model";
 import axios from 'axios';
 
 export const getMainSite = async (): Promise<ISite | null> => {
-  console.log(`API_URL: ${API_URL}`)
   const { data } = await axios.get(`${API_URL}/api/site/main`);
   return data;
 }
