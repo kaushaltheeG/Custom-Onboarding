@@ -23,10 +23,9 @@ services:
     region: ohio
 
   - name: frontend
-    type: web
-    runtime: node
+    type: static
     buildCommand: yarn public-build
-    startCommand: yarn public
+    publishDirectory: ./public/build
     envVars:
       - key: REACT_APP_API_URL
         value: https://backend.onrender.com
