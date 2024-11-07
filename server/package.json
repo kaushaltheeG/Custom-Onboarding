@@ -20,7 +20,7 @@
   "scripts": {
     "dev": "nodemon --watch server/src --exec ts-node server/src/index.ts",
     "build": "tsc",
-    "serve": "dotenv node dist/index.js",
+    "serve": "node dist/index.js",
     "start": "yarn build && yarn serve"
   },
   "devDependencies": {
