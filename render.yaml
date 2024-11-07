@@ -23,7 +23,7 @@ services:
     region: ohio
 
   - name: frontend
-    type: static
+    type: static_site
     buildCommand: yarn public-build
     publishDirectory: ./public/build
     envVars:
