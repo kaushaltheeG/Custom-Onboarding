@@ -24,7 +24,7 @@ services:
     region: oregon
 
   - name: frontend
-    type: static_site
+    type: web
     buildCommand: yarn install && cd frontend && yarn build
     publishDirectory: frontend/build
     env:
