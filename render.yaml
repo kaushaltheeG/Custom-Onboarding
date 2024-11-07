@@ -25,7 +25,7 @@ services:
   - name: public
     type: web
     buildCommand: cd public && yarn build
-    publishDirectory: ./public/build
+    publishDirectory: ./build
     envVars:
       - key: REACT_APP_API_URL
         value: https://backend.onrender.com
