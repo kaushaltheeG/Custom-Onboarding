@@ -4,7 +4,7 @@ import { fetchMainSite, ISiteActions } from "./services/site/actions";
 import { getSite } from "./services/site/selectors";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from "./components/header";
-import Home from "./components/pages/Home";
+import Home from "./components/pages/home";
 import Admin from "./components/pages/Admin";
 import Data from "./components/pages/Data";
 import { Dispatch } from "redux";
