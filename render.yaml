@@ -6,8 +6,8 @@ services:
   - name: backend
     type: web
     runtime: node
-    buildCommand: cd server && yarn install
-    startCommand: cd server && yarn start
+    buildCommand: yarn server-install
+    startCommand: yarn server
     envVars:
       - key: MONGO_URI
         value: 'mongodb+srv://kzk:a44ZOWZgqw07cu6k@development.a3egm.mongodb.net/?retryWrites=true&w=majority&appName=development'
@@ -24,8 +24,8 @@ services:
 
   - name: frontend
     type: web
-    buildCommand: cd public && yarn build
-    startCommand: cd public && yarn start
+    buildCommand: yarn public-build
+    startCommand: yarn public
     envVars:
       - key: REACT_APP_API_URL
         value: https://backend.onrender.com

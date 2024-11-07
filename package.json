@@ -1,0 +1,24 @@
+{
+  "name": "viewfinder",
+  "version": "1.0.0",
+  "description": "An app for photographers to find the best spots in California to capture great photos.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server-install": "cd server && yarn install",
+    "server": "cd server && yarn start",
+    "public-install": "cd public && yarn install",
+    "public": "cd public && yarn start",
+    "public-build": "cd public && yarn install && yarn build ",
+    "build": "yarn run server-install && yarn run public-install && yarn run public-build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaushaltheeG/Custom-Onboarding.git"
+  },
+  "keywords": [],
+  "author": "Kaushal Kumbagowdana",
+  "bugs": {
+    "url": "https://github.com/kaushaltheeG/Custom-Onboarding/issues"
+  },
+  "homepage": "https://github.com/kaushaltheeG/Custom-Onboarding#readme"
+}
