@@ -1,3 +1,4 @@
+import { allMonthList, stateAcronymList } from "../../utils";
 import { ADD_USER_INFO, IUserActions, SET_USER, SET_USERS } from "./actions";
 import { INewUserInfo } from "./model";
 import IUser from "./model";
@@ -16,10 +17,10 @@ export const INIT_NEW_USER_INFO = {
   aboutMe: '',
   streetName: '',
   city: '',
-  state: '',
+  state: stateAcronymList[0],
   zip: '',
-  month: '',
-  day: 0,
+  month: allMonthList[0],
+  day: 1,
   year: 0,
 }
 const INITIAL_USER_STATE: IUserState = {

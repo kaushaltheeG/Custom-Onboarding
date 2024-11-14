@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import TextArea from "../../../ui/TextArea";
 import { useSelector } from "react-redux";
-import { getLoggedInUser, getNewUserInfo } from "../../../../services/user/selectors";
+import { getNewUserInfo } from "../../../../services/user/selectors";
 import useNewUserDebounceInput from "../../../../hooks/useNewUserDebounceInput";
 import DynamicSelect from "../../../ui/DynamicSelect";
 import { BirthdayContainer, ColumnAlign, AddressContainer, StyledLabel, PageTwoAndThreeContainer } from "../styles";
@@ -10,23 +10,19 @@ import Input from "../../../ui/Input";
 
 const PageTwoOrThree: React.FC<{components: string[]}> = ({ components }) => {
   const newUserInfo = useSelector(getNewUserInfo);
-  const currentUser = useSelector(getLoggedInUser);
-  const pendingCustomer = React.useMemo(() => (
-    currentUser ? currentUser.pendingCustomer : null    
-  ), [currentUser]);
 
   const { inputState: newUser, handleChange } = useNewUserDebounceInput(
-      {
-        aboutMe: newUserInfo?.aboutMe || pendingCustomer?.data?.aboutMe || '',
-        streetName: newUserInfo?.streetName || pendingCustomer?.data?.address?.streetName || '',
-        city: newUserInfo?.city || pendingCustomer?.data?.address?.city || '',
-        state: newUserInfo?.state || pendingCustomer?.data?.address?.state || stateAcronymList[0],
-        zip:  newUserInfo?.zip || pendingCustomer?.data?.address?.zip || '',
-        month: newUserInfo?.month || pendingCustomer?.data?.birthday?.month || allMonthList[0],
-        day: newUserInfo?.day || pendingCustomer?.data?.birthday?.day || 0,
-        year: newUserInfo?.year || pendingCustomer?.data?.birthday?.year || 0,
-      },
-      100 // Debounce delay in milliseconds
+    {
+      aboutMe: newUserInfo?.aboutMe,
+      streetName: newUserInfo?.streetName,
+      city: newUserInfo?.city,
+      state: newUserInfo?.state,
+      zip:  newUserInfo?.zip,
+      month: newUserInfo?.month,
+      day: newUserInfo?.day,
+      year: newUserInfo?.year,
+    },
+    100 // Debounce delay in milliseconds
   );
 
   const renderAboutMe = useCallback(() => {

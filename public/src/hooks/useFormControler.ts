@@ -57,7 +57,7 @@ const useFormControler = (state: number): {
 const checkNewUserInfoIsFilled = (
   newUserInfo: INewUserInfo,
   pageNum: number,
-  currentPageLayoutMap: {[page: number]: string[]}
+  currentPageLayoutMap: { [page: number]: string[] }
 ) => {
   const fieldsToCheck = currentPageLayoutMap[pageNum];
 
