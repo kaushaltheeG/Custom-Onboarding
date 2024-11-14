@@ -16,7 +16,7 @@ class UserService implements IUserService {
    *  a proper application will salt the password hash to prevent creating
    *  the same password hash if multiple user share the same password
   */
-  async createPassowrdHash(password: string): Promise<string> {
+  async createPasswordHash(password: string): Promise<string> {
     try {
       return crypto.createHash('sha256').update(password).digest('hex');
     } catch (error) {
@@ -27,7 +27,7 @@ class UserService implements IUserService {
   async insertUser(dto: ICreateUser): Promise<IUser | null> {
     try {
       const { password, ...remainingDto } = dto;
-      const passwordHash = await this.createPassowrdHash(password);
+      const passwordHash = await this.createPasswordHash(password);
       const userDto: IUser = { ...remainingDto, passwordHash };
       const user = new User(userDto).toDTO();
       await this._userCollection.insertOne(user);

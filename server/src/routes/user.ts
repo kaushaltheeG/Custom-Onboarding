@@ -29,7 +29,7 @@ const createUserRouter = (db: Db) => {
         ctx.throw(400, 'password is required for request and must be a string');
       }
 
-      const passwordHash = await userService.createPassowrdHash(password);
+      const passwordHash = await userService.createPasswordHash(password);
       const user = await userService.getUser(email, passwordHash);
       if (!user) {
         ctx.body = null;

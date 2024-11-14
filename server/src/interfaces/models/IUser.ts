@@ -4,7 +4,7 @@ export interface IAddress {
   streetName: string;
   city: string;
   state: string;
-  zip: number;
+  zip: string;
 };
 
 export interface IBirthday {
@@ -55,14 +55,14 @@ export const isValidAddress = (obj: any, checkLength = true): boolean => {
     'streetName' in obj && typeof obj.streetName === 'string' &&
     'city' in obj && typeof obj.city === 'string' &&
     'state' in obj && typeof obj.state === 'string' &&
-    'zip' in obj && typeof obj.zip === 'number'
+    'zip' in obj && typeof obj.zip === 'string'
   );
   if (!checkLength) {
     return firstCheck;
   }
   return (
     firstCheck &&
-    obj.streeName.length &&
+    obj.streetName.length &&
     obj.city.length &&
     obj.state.length
   );
