@@ -3,7 +3,7 @@ export interface IAddress {
   streetName: string;
   city: string;
   state: string;
-  zip: number;
+  zip: string;
 };
 
 export interface IBirthday {
@@ -48,7 +48,7 @@ export interface INewUserInfo {
   streetName: string;
   city: string;
   state: string;
-  zip: number;
+  zip: string;
   month: string;
   day: number;
   year: number;

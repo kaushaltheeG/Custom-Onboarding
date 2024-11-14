@@ -7,42 +7,42 @@ export const createUserFromInput = (newUserInfo: INewUserInfo): ICreateUser => {
       streetName, state, city, zip, month, day, year
     } = newUserInfo;
     return {
-        firstName,
-        lastName,
-        email,
-        password, // Ensure this is properly hashed in your final logic
+      firstName,
+      lastName,
+      email,
+      password, // Ensure this is properly hashed in your final logic
+      data: {
+        aboutMe,
+        address: {
+          streetName,
+          city,
+          state,
+          zip,
+        },
+        birthday: {
+          month,
+          day,
+          year,
+        },
+      },
+      pendingCustomer: {
+        firstName: '',
+        lastName: '',
+        email: '',
         data: {
-          aboutMe,
+          aboutMe: '',
           address: {
-              streetName,
-              city,
-              state,
-              zip,
+            streetName: '',
+            city: '',
+            state: '',
+            zip: '',
           },
           birthday: {
-              month,
-              day,
-              year,
+            month: '',
+            day: 0,
+            year: 0,
           },
         },
-        pendingCustomer: {
-          firstName: '',
-          lastName: '',
-          email: '',
-          data: {
-            aboutMe: '',
-            address: {
-                streetName: '',
-                city: '',
-                state: '',
-                zip: 0,
-            },
-            birthday: {
-                month: '',
-                day: 0,
-                year: 0,
-            },
-          },
-        },
+      },
     };
 };

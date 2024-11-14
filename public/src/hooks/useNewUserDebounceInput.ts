@@ -6,61 +6,61 @@ import { Dispatch } from 'redux';
 import { getNewUserInfo } from '../services/user/selectors';
 import { IFormActions, setFormError } from '../services/form/action';
 
-const useNewUserDebounceInput = (initialState: any, debounceDelay: number) => {
-    const [inputState, setInputState] = useState(initialState);
-    const dispatch = useDispatch<Dispatch<IUserActions | IFormActions>>();
-    const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-    const newUserInfo = useSelector(getNewUserInfo);
+const useNewUserDebounceInput = <T,>(initialState: T, debounceDelay: number) => {
+  const [inputState, setInputState] = useState<T>(initialState);
+  const dispatch = useDispatch<Dispatch<IUserActions | IFormActions>>();
+  const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const newUserInfo = useSelector(getNewUserInfo);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setInputState((prev: {any: any}) => ({
-            ...prev,
-            [name]: value,
-        }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setInputState((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
 
-        // Clear the previous timeout
-        if (debounceTimeout.current) {
-            clearTimeout(debounceTimeout.current);
-        }
-        const createNewUserInfo = {
-            ...newUserInfo,
-            [name]: value,
-        };
-
-        // Set a new timeout to dispatch after the specified delay
-        debounceTimeout.current = setTimeout(() => {
-            dispatch(addNewUserInfo(createNewUserInfo)); // Dispatch updated inputState
-        }, debounceDelay);
+    // Clear the previous timeout
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+    }
+    const createNewUserInfo = {
+      ...newUserInfo,
+      [name]: value,
     };
 
-    useEffect(() => {
-        // Cleanup timeout on component unmount
-        return () => {
-            if (debounceTimeout.current) {
-                clearTimeout(debounceTimeout.current);
-            }
-        };
-    }, []);
+    // Set a new timeout to dispatch after the specified delay
+    debounceTimeout.current = setTimeout(() => {
+      dispatch(addNewUserInfo(createNewUserInfo)); // Dispatch updated inputState
+    }, debounceDelay);
+  };
 
-    const checkPassword = React.useCallback((passwordOne: string, passwordTwo: string, formError: Error | null) => {
-      if (!passwordOne.length || !passwordTwo.length) {
-        return; 
+  useEffect(() => {
+    // Cleanup timeout on component unmount
+    return () => {
+      if (debounceTimeout.current) {
+        clearTimeout(debounceTimeout.current);
       }
-      if (passwordTwo !== passwordOne && !formError) {
-        dispatch(setFormError(new Error('passwords do not match, please recheck')));
-        return;
-      }
-      if (formError) {
-        dispatch(setFormError(null));
-      }
-    },[dispatch]);
-
-    return {
-      inputState,
-      handleChange,
-      checkPassword,
     };
+  }, []);
+
+  const checkPassword = React.useCallback((passwordOne: string, passwordTwo: string, formError: Error | null) => {
+    if (!passwordOne.length || !passwordTwo.length) {
+      return; 
+    }
+    if (passwordTwo !== passwordOne && !formError) {
+      dispatch(setFormError(new Error('passwords do not match, please recheck')));
+      return;
+    }
+    if (formError) {
+      dispatch(setFormError(null));
+    }
+  },[dispatch]);
+
+  return {
+    inputState,
+    handleChange,
+    checkPassword,
+  };
 };
 
 export default useNewUserDebounceInput;
