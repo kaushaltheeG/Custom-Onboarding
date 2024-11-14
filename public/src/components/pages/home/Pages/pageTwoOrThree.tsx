@@ -15,13 +15,13 @@ const PageTwoOrThree: React.FC<{components: string[]}> = ({ components }) => {
     currentUser ? currentUser.pendingCustomer : null    
   ), [currentUser]);
 
-  const {inputState: newUser, handleChange} = useNewUserDebounceInput(
+  const { inputState: newUser, handleChange } = useNewUserDebounceInput(
       {
         aboutMe: newUserInfo?.aboutMe || pendingCustomer?.data?.aboutMe || '',
         streetName: newUserInfo?.streetName || pendingCustomer?.data?.address?.streetName || '',
         city: newUserInfo?.city || pendingCustomer?.data?.address?.city || '',
         state: newUserInfo?.state || pendingCustomer?.data?.address?.state || stateAcronymList[0],
-        zip:  newUserInfo?.zip || pendingCustomer?.data?.address?.zip || 0,
+        zip:  newUserInfo?.zip || pendingCustomer?.data?.address?.zip || '',
         month: newUserInfo?.month || pendingCustomer?.data?.birthday?.month || allMonthList[0],
         day: newUserInfo?.day || pendingCustomer?.data?.birthday?.day || 0,
         year: newUserInfo?.year || pendingCustomer?.data?.birthday?.year || 0,

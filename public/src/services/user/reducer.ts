@@ -17,7 +17,7 @@ export const INIT_NEW_USER_INFO = {
   streetName: '',
   city: '',
   state: '',
-  zip: 0,
+  zip: '',
   month: '',
   day: 0,
   year: 0,

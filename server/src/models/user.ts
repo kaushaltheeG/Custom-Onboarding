@@ -1,5 +1,5 @@
 import assert from "assert";
-import IUser, { isValidPendingCustomer, isValidUserData } from "../interfaces/models/IUser"; // isValidUserData
+import IUser from "../interfaces/models/IUser"; // isValidUserData
 import Base from "./base";
 import { isValidEmail } from "../utils/validations";
 
@@ -64,7 +64,6 @@ class User extends Base<IUser> {
   }
 
   set data(value: IUser['data']) {
-    assert(isValidUserData(value), 'user data field is not valid');
     this._data = value;
   }
 
@@ -73,7 +72,6 @@ class User extends Base<IUser> {
   }
 
   set pendingCustomer(value: IUser['pendingCustomer']) {
-    assert(isValidPendingCustomer(value), 'invalid pending customer data, please recheck the user data fields and their value types');
     this._pendingCustomer = value;
   }
 
