@@ -3,7 +3,7 @@ import { addNewUserInfo, GET_USERS, IInsertUser, INSERT_USER, IValidateUser, set
 import { addNewUser, getUsers, validateUser } from "./api";
 import IUser from "./model";
 import { IState } from "../state";
-import { getNewUserInfo, isLoggedIn } from "./selectors";
+import { getNewUserInfo } from "./selectors";
 import { createUserFromInput } from "./utils";
 import { setCurrentFormPage, setFormError } from "../form/action";
 import { INIT_NEW_USER_INFO } from "./reducer";
@@ -40,8 +40,20 @@ const addNewUserSaga = function* ({ payload }: IInsertUser) {
     const { navigate } = payload;
     const state: IState = yield select();
     const newUserInfo = getNewUserInfo(state);
-    const loggedIn = isLoggedIn(state);
     const userData = createUserFromInput(newUserInfo);
+
+    // check birthday year value
+    if (userData.data.birthday.month) {
+      const intValue = Number(userData.data.birthday.year);
+      const currentYear = new Date().getFullYear()
+      const check = currentYear - 100 < intValue && intValue < currentYear + 1;
+      if (!check) {
+        yield put(setFormError(new Error('Must be under a 100 years old')));
+        return;
+      }
+    }
+    
+    // convert values to proper types
 
     const newUser : IUser | null = yield call(addNewUser, userData);
     if (!newUser) {
@@ -49,9 +61,6 @@ const addNewUserSaga = function* ({ payload }: IInsertUser) {
       return;
     }
 
-    if (!loggedIn) {
-      yield put(setUser(newUser));
-    }
     yield put(setFormError(null));
     yield put(addNewUserInfo(INIT_NEW_USER_INFO));
     yield put(setCurrentFormPage(1));
