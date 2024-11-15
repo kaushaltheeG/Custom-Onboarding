@@ -8,6 +8,7 @@ import { createUserFromInput } from "./utils";
 import { setCurrentFormPage, setFormError } from "../form/action";
 import { INIT_NEW_USER_INFO } from "./reducer";
 import { setModal } from "../modal/action";
+import { SESSION_STORAGE_FORM_STATE, SESSION_STORAGE_ONBOARDING_KEY } from "../../utils";
 
 const fetchAndSetUsersSaga = function* () {
   try {
@@ -34,6 +35,11 @@ const validateUserSaga = function* ({ payload }: IValidateUser) {
     console.error(e);
     yield put(setFormError(new Error('Failed validating the user')))
   }
+};
+
+const clearSessionFormData = () => {
+  sessionStorage.removeItem(SESSION_STORAGE_ONBOARDING_KEY);
+  sessionStorage.removeItem(SESSION_STORAGE_FORM_STATE);
 };
 
 const addNewUserSaga = function* ({ payload }: IInsertUser) {
@@ -63,7 +69,8 @@ const addNewUserSaga = function* ({ payload }: IInsertUser) {
     }
 
     yield put(setFormError(null));
-    yield put(addNewUserInfo(INIT_NEW_USER_INFO));
+    yield call(clearSessionFormData);
+    yield put(addNewUserInfo(INIT_NEW_USER_INFO()));
     yield put(setCurrentFormPage(1));
     yield put(setModal({
       title: 'Successful Submission',

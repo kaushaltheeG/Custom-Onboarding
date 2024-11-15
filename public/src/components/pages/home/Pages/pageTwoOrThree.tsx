@@ -103,6 +103,9 @@ const PageTwoOrThree: React.FC<{components: string[]}> = ({ components }) => {
   }, [handleChange, newUser.city, newUser.state, newUser.streetName, newUser.zip])
 
   const renderComponents = React.useCallback(() => {
+    if (!components) {
+      return null;
+    }
     return components.map((component) => {
       switch(component) {
         case 'aboutMe':

@@ -1,4 +1,4 @@
-import { allMonthList, stateAcronymList } from "../../utils";
+import { allMonthList, SESSION_STORAGE_ONBOARDING_KEY, stateAcronymList } from "../../utils";
 import { ADD_USER_INFO, IUserActions, SET_USER, SET_USERS } from "./actions";
 import { INewUserInfo } from "./model";
 import IUser from "./model";
@@ -9,24 +9,35 @@ export interface IUserState {
   user: IUser | null,
   users: IUser[],
 }
-export const INIT_NEW_USER_INFO = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  password: '',
-  aboutMe: '',
-  streetName: '',
-  city: '',
-  state: stateAcronymList[0],
-  zip: '',
-  month: 'select',
-  day: 1,
-  year: 2024,
+export const INIT_NEW_USER_INFO = () => {
+  const storedNewCustomerData = sessionStorage.getItem(SESSION_STORAGE_ONBOARDING_KEY);
+  if (storedNewCustomerData) {
+    try {
+      return JSON.parse(storedNewCustomerData);
+    } catch (error) {
+      console.error('Failed to parse stored data', error);
+    }
+  }
+
+  return {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    aboutMe: '',
+    streetName: '',
+    city: '',
+    state: stateAcronymList[0],
+    zip: '',
+    month: 'select',
+    day: 1,
+    year: new Date().getFullYear(),
+  }
 }
 const INITIAL_USER_STATE: IUserState = {
   user: null,
   users: [],
-  newUser: INIT_NEW_USER_INFO,
+  newUser: INIT_NEW_USER_INFO(),
 };
 
 const userReducer = (state: IUserState = INITIAL_USER_STATE, action: IUserActions) => {

@@ -6,6 +6,7 @@ import { IFormActions, setCurrentFormPage, setFormError } from "../services/form
 import { Dispatch } from "redux";
 import { insertUser, IUserActions } from '../services/user/actions';
 import { useNavigate } from "react-router";
+import { SESSION_STORAGE_FORM_STATE } from "../utils";
 
 const useFormControler = (state: number): {
   onPrev: () => void;
@@ -23,6 +24,7 @@ const useFormControler = (state: number): {
     }
     const last = stack.pop()!;
     dispatch(setCurrentFormPage(last));
+    sessionStorage.setItem(SESSION_STORAGE_FORM_STATE, JSON.stringify(last));
     queue.unshift(last);
     return;
   }
@@ -39,6 +41,7 @@ const useFormControler = (state: number): {
     const current = queue.shift()!;
     stack.push(current);
     dispatch(setCurrentFormPage(queue[0]));
+    sessionStorage.setItem(SESSION_STORAGE_FORM_STATE, JSON.stringify(queue[0]));
     dispatch(setFormError(null));
     return;
   }

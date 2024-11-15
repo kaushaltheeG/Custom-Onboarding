@@ -5,6 +5,7 @@ import { addNewUserInfo, IUserActions } from '../services/user/actions'; // Adju
 import { Dispatch } from 'redux';
 import { getNewUserInfo } from '../services/user/selectors';
 import { IFormActions, setFormError } from '../services/form/action';
+import { SESSION_STORAGE_ONBOARDING_KEY } from '../utils';
 
 const useNewUserDebounceInput = <T,>(initialState: T, debounceDelay: number) => {
   const [inputState, setInputState] = useState<T>(initialState);
@@ -30,7 +31,10 @@ const useNewUserDebounceInput = <T,>(initialState: T, debounceDelay: number) => 
 
     // Set a new timeout to dispatch after the specified delay
     debounceTimeout.current = setTimeout(() => {
-      dispatch(addNewUserInfo(createNewUserInfo)); // Dispatch updated inputState
+      // updated newUserInfo state
+      dispatch(addNewUserInfo(createNewUserInfo));
+      // save newUserInfo to session storage
+      sessionStorage.setItem(SESSION_STORAGE_ONBOARDING_KEY, JSON.stringify(createNewUserInfo));
     }, debounceDelay);
   };
 
