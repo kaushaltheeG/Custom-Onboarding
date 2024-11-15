@@ -28,7 +28,7 @@ const Admin: React.FC = () => {
             name="page"
             value={intTodropdownValueMap[component.page]}
             onChange={(e) => updatePage(component.type, e)}
-            options={['None','Two','Three']}
+            options={['Hide','Two','Three']}
           />
           <DynamicSelect
             label="Order"

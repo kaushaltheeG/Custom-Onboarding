@@ -58,14 +58,14 @@ const useAdmin = (site: ISite | null) => {
   };
 
   const dropdownToIntMap: { [key: string]: number } = {
-    'None': 0,
+    'Hide': 0,
     'One': 1,
     'Two': 2,
     'Three': 3,
   };
 
   const intTodropdownValueMap: { [key: number]: string } = {
-    0: 'None',
+    0: 'Hide',
     1: 'One',
     2: 'Two',
     3: 'Three',
