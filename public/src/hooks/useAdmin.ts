@@ -19,7 +19,7 @@ const useAdmin = (site: ISite | null) => {
   }, [site]);
 
   const updatePage = (componentType: ComponentType, e: ChangeEvent<HTMLSelectElement>) => {
-    const newPage = parseInt(e.target.value) as PagePlacementType;
+    const newPage = dropdownToIntMap[e.target.value] as PagePlacementType;
 
     // Check constraints
     if (newPage === 0 && components.filter(c => c.page === 0).length >= 1) {
@@ -41,7 +41,7 @@ const useAdmin = (site: ISite | null) => {
   };
 
   const updateOrder = (componentType: ComponentType, e: ChangeEvent<HTMLSelectElement>) => {
-    const newOrder = parseInt(e.target.value);
+    const newOrder = dropdownToIntMap[e.target.value];
     setComponents(prevComponents =>
       prevComponents.map(component =>
         component.type === componentType 
@@ -57,6 +57,20 @@ const useAdmin = (site: ISite | null) => {
     'birthday': 'Birthday',
   };
 
-  return { components, updatePage, updateOrder, typeToLabel };
+  const dropdownToIntMap: { [key: string]: number } = {
+    'None': 0,
+    'One': 1,
+    'Two': 2,
+    'Three': 3,
+  };
+
+  const intTodropdownValueMap: { [key: number]: string } = {
+    0: 'None',
+    1: 'One',
+    2: 'Two',
+    3: 'Three',
+  };
+
+  return { components, updatePage, updateOrder, typeToLabel, intTodropdownValueMap};
 };
 export default useAdmin;

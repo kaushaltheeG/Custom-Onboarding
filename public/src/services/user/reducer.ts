@@ -19,7 +19,7 @@ export const INIT_NEW_USER_INFO = {
   city: '',
   state: stateAcronymList[0],
   zip: '',
-  month: '',
+  month: 'select',
   day: 1,
   year: 2024,
 }
