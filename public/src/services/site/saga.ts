@@ -3,6 +3,7 @@ import { getMainSite, updateSiteLayout } from "./api"
 import { FETCH_MAIN_SITE, IUpdateLayoutAction, setMainSite, setSiteError, UPDATE_LAYOUT } from "./actions";
 import ISite from "./model";
 import { validateNewSiteLayout } from "./utils";
+import { setModal } from "../modal/action";
 
 const fetchAndSetMainSite = function* () {
   try {
@@ -13,7 +14,7 @@ const fetchAndSetMainSite = function* () {
   }
 };
 
-const updateSiteLayoutSage = function* ({ payload }: IUpdateLayoutAction) {
+const updateSiteLayoutSaga = function* ({ payload }: IUpdateLayoutAction) {
   try {
     const { layout, navigate } = payload;
     if (!validateNewSiteLayout(layout)) {
@@ -28,7 +29,11 @@ const updateSiteLayoutSage = function* ({ payload }: IUpdateLayoutAction) {
     }
     yield put(setMainSite(updatedSite));
     yield put(setSiteError(null));
-    navigate('/');
+    yield put(setModal({
+      title: 'Successful Change',
+      message: 'Congratulations, your new form layout has been applied',
+      onConfirm: () => { navigate('/') },
+    }));
   } catch (e) {
     console.error(e);
     yield put(setSiteError(new Error('Failed api request to update the site layout')))
@@ -37,6 +42,6 @@ const updateSiteLayoutSage = function* ({ payload }: IUpdateLayoutAction) {
 
 const siteSaga = function* () {
   yield takeEvery(FETCH_MAIN_SITE, fetchAndSetMainSite);
-  yield takeEvery(UPDATE_LAYOUT, updateSiteLayoutSage)
+  yield takeEvery(UPDATE_LAYOUT, updateSiteLayoutSaga)
 };
 export default siteSaga;

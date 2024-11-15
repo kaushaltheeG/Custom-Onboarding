@@ -7,6 +7,7 @@ import { getNewUserInfo } from "./selectors";
 import { createUserFromInput } from "./utils";
 import { setCurrentFormPage, setFormError } from "../form/action";
 import { INIT_NEW_USER_INFO } from "./reducer";
+import { setModal } from "../modal/action";
 
 const fetchAndSetUsersSaga = function* () {
   try {
@@ -64,7 +65,11 @@ const addNewUserSaga = function* ({ payload }: IInsertUser) {
     yield put(setFormError(null));
     yield put(addNewUserInfo(INIT_NEW_USER_INFO));
     yield put(setCurrentFormPage(1));
-    navigate('/data');
+    yield put(setModal({
+      title: 'Successful Submission',
+      message: `Congratulations ${newUser.firstName}, you been added to the system`,
+      onConfirm: () => { navigate('/data') },
+    }));
   } catch (e: any) {
     console.error(e);
     yield put(setFormError(new Error(e?.response?.data?.error || 'Failed add user api request')));
