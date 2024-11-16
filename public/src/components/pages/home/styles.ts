@@ -18,7 +18,7 @@ export const Title = styled.span`
 `;
 
 export const FormContainer = styled.div`
-  background-color: #ffffff;
+  background-color: #c9e2c4;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -68,7 +68,7 @@ export const Circle = styled.div<{ active: boolean }>`
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: ${({ active }) => (active ? '#008080' : '#e0e0e0')};
+    background-color: ${({ active }) => (active ? '#84a785' : '#e0e0e0')};
     display: flex;
     justify-content: center;
     align-items: center;

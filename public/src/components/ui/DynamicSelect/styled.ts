@@ -13,12 +13,17 @@ export const StyledLabel = styled.label`
 
 export const StyledSelect = styled.select<{ dynamicWidth: number }>`
   width: ${({ dynamicWidth }) => dynamicWidth}px;
-  padding: 8px;
+  padding: 10px;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid #033d03;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #fff url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDE2IDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMCBsOCA4bDggLThsLTggLTgiIGZpbGw9IiMwMDAiLz48L3N2Zz4=') no-repeat right 10px center;
 
   &:focus {
-    border-color: #008080; // Change border color on focus
-    outline: none; // Remove default outline
+    border-color: #52d752;
+    outline: none;
   }
 `;

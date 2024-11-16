@@ -4,7 +4,7 @@ export const ButtonContainer = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #007bff;
+    background-color: #57a05b;
     color: white;
     border: none;
     border-radius: 25px;
@@ -14,11 +14,15 @@ export const ButtonContainer = styled.button`
     transition: background-color 0.3s ease;
 
     &:hover {
-        background-color: #0056b3;
+      background-color: #1f8124;
+    }
+
+    &:active {
+      transform: scale(0.98);
     }
 
     &:disabled {
-        background-color: #ccc;
-        cursor: not-allowed;
+      background-color: #c8e6c9;
+      cursor: not-allowed;
     }
 `;
