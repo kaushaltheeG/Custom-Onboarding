@@ -13,11 +13,11 @@ import { useNavigate } from "react-router";
 
 const Admin: React.FC = () => {
   const mainSite = useSelector(getSite);
-  const { components, updatePage, updateOrder, typeToLabel } = useAdmin(mainSite);
+  const { components, updatePage, updateOrder, typeToLabel, intTodropdownValueMap } = useAdmin(mainSite);
   const dispatch = useDispatch<Dispatch<ISiteActions>>();
   const layoutError = useSelector(getSiteError);
   const navigate = useNavigate();
-  
+
   const renderOptions = React.useCallback(() => {
     return components.map((component: IComponent) => {
       return (
@@ -26,16 +26,16 @@ const Admin: React.FC = () => {
           <DynamicSelect
             label="Page"
             name="page"
-            value={component.page}
+            value={intTodropdownValueMap[component.page]}
             onChange={(e) => updatePage(component.type, e)}
-            options={[0,2,3]}
+            options={['Hide','Two','Three']}
           />
           <DynamicSelect
             label="Order"
             name="order"
-            value={component.order}
+            value={intTodropdownValueMap[component.order]}
             onChange={(e) => updateOrder(component.type, e)}
-            options={[1,2]}
+            options={['One','Two']}
           />
         </OptionContainer>
       );
@@ -44,8 +44,7 @@ const Admin: React.FC = () => {
 
   const handleOnClick = React.useCallback(() => {
     dispatch(updateSiteLayout(components, navigate));
-    // navigate('/');
-  }, [components, dispatch, navigate]);
+  }, [components, dispatch]);
 
   if (!mainSite) {
     return null;

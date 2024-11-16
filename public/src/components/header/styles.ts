@@ -25,9 +25,9 @@ export const NavLink = styled(Link)`
 export const ParentComponent = styled.div`
   width: 100%;
 `;
-export const HeaderContainer = styled.header<{ loggedIn: boolean }>`
+export const HeaderContainer = styled.header`
   display: flex;
-  justify-content: ${({ loggedIn }) => (loggedIn ? 'space-evenly' : 'center')};
+  justify-content: center;
   align-items: center;
   width: 100%;
 `;

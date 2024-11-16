@@ -8,6 +8,7 @@ import Home from "./components/pages/home";
 import Admin from "./components/pages/Admin";
 import Data from "./components/pages/Data";
 import { Dispatch } from "redux";
+import Modal from "./components/ui/Modal";
 
 function App() {
   const dispatch = useDispatch<Dispatch<ISiteActions>>();
@@ -28,6 +29,7 @@ function App() {
 				<Route path="/data" element={<Data />}></Route>
 				<Route path="/" element={<Home />}></Route>
 			</Routes>
+      <Modal />
 		</Router>
 	);
 }

@@ -2,6 +2,9 @@ export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
 
+export const SESSION_STORAGE_ONBOARDING_KEY = 'current_customer_oboarding';
+export const SESSION_STORAGE_FORM_STATE = 'form_state';
+
 export const allMonthList = [
   "January",
   "February",

@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addNewUserInfo, IUserActions } from '../services/user/actions'; // Adjust the import path as needed
 import { Dispatch } from 'redux';
 import { getNewUserInfo } from '../services/user/selectors';
-import { IFormActions, setFormError } from '../services/form/action';
+import { SESSION_STORAGE_ONBOARDING_KEY } from '../utils';
 
 const useNewUserDebounceInput = <T,>(initialState: T, debounceDelay: number) => {
   const [inputState, setInputState] = useState<T>(initialState);
-  const dispatch = useDispatch<Dispatch<IUserActions | IFormActions>>();
+  const dispatch = useDispatch<Dispatch<IUserActions>>();
   const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const newUserInfo = useSelector(getNewUserInfo);
 
@@ -30,7 +30,10 @@ const useNewUserDebounceInput = <T,>(initialState: T, debounceDelay: number) => 
 
     // Set a new timeout to dispatch after the specified delay
     debounceTimeout.current = setTimeout(() => {
-      dispatch(addNewUserInfo(createNewUserInfo)); // Dispatch updated inputState
+      // updated newUserInfo state
+      dispatch(addNewUserInfo(createNewUserInfo));
+      // save newUserInfo to session storage
+      sessionStorage.setItem(SESSION_STORAGE_ONBOARDING_KEY, JSON.stringify(createNewUserInfo));
     }, debounceDelay);
   };
 
@@ -43,23 +46,9 @@ const useNewUserDebounceInput = <T,>(initialState: T, debounceDelay: number) => 
     };
   }, []);
 
-  const checkPassword = React.useCallback((passwordOne: string, passwordTwo: string, formError: Error | null) => {
-    if (!passwordOne.length || !passwordTwo.length) {
-      return; 
-    }
-    if (passwordTwo !== passwordOne && !formError) {
-      dispatch(setFormError(new Error('passwords do not match, please recheck')));
-      return;
-    }
-    if (formError) {
-      dispatch(setFormError(null));
-    }
-  },[dispatch]);
-
   return {
     inputState,
     handleChange,
-    checkPassword,
   };
 };
 

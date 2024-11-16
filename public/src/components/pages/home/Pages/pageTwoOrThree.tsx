@@ -1,125 +1,56 @@
-import React, { useCallback } from "react";
-import TextArea from "../../../ui/TextArea";
+import React from "react";
 import { useSelector } from "react-redux";
-import { getLoggedInUser, getNewUserInfo } from "../../../../services/user/selectors";
+import { getNewUserInfo } from "../../../../services/user/selectors";
 import useNewUserDebounceInput from "../../../../hooks/useNewUserDebounceInput";
-import DynamicSelect from "../../../ui/DynamicSelect";
-import { BirthdayContainer, ColumnAlign, AddressContainer, StyledLabel, PageTwoAndThreeContainer } from "../styles";
-import { allMonthList, daysInMonthList, stateAcronymList } from "../../../../utils";
-import Input from "../../../ui/Input";
+import { PageTwoAndThreeContainer } from "../styles";
+import Address from "../FormComponents/Address";
+import Birthday from "../FormComponents/Birthday";
+import AboutMe from "../FormComponents/AboutMe";
+
+export interface IPageTwoAndThreeState {
+  aboutMe: string;
+  streetName: string;
+  city: string;
+  state: string;
+  zip:  string;
+  month: string;
+  day: number;
+  year: number;
+}
 
 const PageTwoOrThree: React.FC<{components: string[]}> = ({ components }) => {
   const newUserInfo = useSelector(getNewUserInfo);
-  const currentUser = useSelector(getLoggedInUser);
-  const pendingCustomer = React.useMemo(() => (
-    currentUser ? currentUser.pendingCustomer : null    
-  ), [currentUser]);
-
-  const { inputState: newUser, handleChange } = useNewUserDebounceInput(
-      {
-        aboutMe: newUserInfo?.aboutMe || pendingCustomer?.data?.aboutMe || '',
-        streetName: newUserInfo?.streetName || pendingCustomer?.data?.address?.streetName || '',
-        city: newUserInfo?.city || pendingCustomer?.data?.address?.city || '',
-        state: newUserInfo?.state || pendingCustomer?.data?.address?.state || stateAcronymList[0],
-        zip:  newUserInfo?.zip || pendingCustomer?.data?.address?.zip || '',
-        month: newUserInfo?.month || pendingCustomer?.data?.birthday?.month || allMonthList[0],
-        day: newUserInfo?.day || pendingCustomer?.data?.birthday?.day || 0,
-        year: newUserInfo?.year || pendingCustomer?.data?.birthday?.year || 0,
-      },
-      100 // Debounce delay in milliseconds
+  const { inputState: newUser, handleChange } = useNewUserDebounceInput<IPageTwoAndThreeState>(
+    {
+      aboutMe: newUserInfo?.aboutMe,
+      streetName: newUserInfo?.streetName,
+      city: newUserInfo?.city,
+      state: newUserInfo?.state,
+      zip:  newUserInfo?.zip,
+      month: newUserInfo?.month,
+      day: newUserInfo?.day,
+      year: newUserInfo?.year,
+    },
+    100 // Debounce delay in milliseconds
   );
 
-  const renderAboutMe = useCallback(() => {
-    return (
-      <TextArea
-        label="About Me"
-        name="aboutMe"
-        maxChars={200}
-        value={newUser.aboutMe}
-        handleChange={handleChange}
-      />
-    );
-  },[newUser.aboutMe, handleChange]);
-
-  const renderBirthday = useCallback(() => {
-    return (
-      <ColumnAlign>
-        <StyledLabel>Birthday</StyledLabel>
-        <BirthdayContainer>
-          <DynamicSelect
-            label="Month"
-            name="month"
-            value={newUser.month}
-            options={allMonthList}
-            onChange={handleChange}
-          />
-          <DynamicSelect
-            label="Day"
-            name="day"
-            value={newUser.day}
-            options={daysInMonthList}
-            onChange={handleChange}
-          />
-          <Input
-            label="Year"
-            name="year"
-            value={newUser.year}
-            onChange={handleChange}
-          />
-        </BirthdayContainer>
-      </ColumnAlign>
-    );
-  }, [handleChange, newUser.day, newUser.month, newUser.year]);
-
-  const renderAddress = useCallback(() => {
-    return (
-      <ColumnAlign>
-        <StyledLabel>Address</StyledLabel>
-        <AddressContainer>
-          <Input
-            label="Street Name"
-            name="streetName"
-            value={newUser.streetName}
-            onChange={handleChange}
-          />
-          <Input
-            label="City"
-            name="city"
-            value={newUser.city}
-            onChange={handleChange}
-          />
-          <DynamicSelect
-            label="State"
-            name="state"
-            value={newUser.state}
-            options={stateAcronymList}
-            onChange={handleChange}
-          />
-          <Input
-            label="Zip"
-            name="zip"
-            value={newUser.zip}
-            onChange={handleChange}
-          />
-        </AddressContainer>
-      </ColumnAlign>
-    )
-  }, [handleChange, newUser.city, newUser.state, newUser.streetName, newUser.zip])
-
   const renderComponents = React.useCallback(() => {
+    if (!components) {
+      return null;
+    }
     return components.map((component) => {
       switch(component) {
         case 'aboutMe':
-          return renderAboutMe();
+          return <AboutMe newUser={newUser} handleChange={handleChange}/>;
         case  'address':
-          return renderAddress();
+          return <Address newUser={newUser} handleChange={handleChange}/>;
         case 'birthday':
-          return renderBirthday();
+          return <Birthday newUser={newUser} handleChange={handleChange}/>;
         default:
           return null;
       }
-    })
-  }, [components, renderAboutMe, renderAddress, renderBirthday]);
+    });
+  }, [components, newUser, handleChange]);
 
   return (
     <PageTwoAndThreeContainer>

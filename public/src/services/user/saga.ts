@@ -3,10 +3,12 @@ import { addNewUserInfo, GET_USERS, IInsertUser, INSERT_USER, IValidateUser, set
 import { addNewUser, getUsers, validateUser } from "./api";
 import IUser from "./model";
 import { IState } from "../state";
-import { getNewUserInfo, isLoggedIn } from "./selectors";
+import { getNewUserInfo } from "./selectors";
 import { createUserFromInput } from "./utils";
 import { setCurrentFormPage, setFormError } from "../form/action";
 import { INIT_NEW_USER_INFO } from "./reducer";
+import { setModal } from "../modal/action";
+import { SESSION_STORAGE_FORM_STATE, SESSION_STORAGE_ONBOARDING_KEY } from "../../utils";
 
 const fetchAndSetUsersSaga = function* () {
   try {
@@ -35,13 +37,30 @@ const validateUserSaga = function* ({ payload }: IValidateUser) {
   }
 };
 
+const clearSessionFormData = () => {
+  sessionStorage.removeItem(SESSION_STORAGE_ONBOARDING_KEY);
+  sessionStorage.removeItem(SESSION_STORAGE_FORM_STATE);
+};
+
 const addNewUserSaga = function* ({ payload }: IInsertUser) {
   try {
     const { navigate } = payload;
     const state: IState = yield select();
     const newUserInfo = getNewUserInfo(state);
-    const loggedIn = isLoggedIn(state);
     const userData = createUserFromInput(newUserInfo);
+
+    // check birthday year value
+    if (userData.data.birthday.month) {
+      const intValue = Number(userData.data.birthday.year);
+      const currentYear = new Date().getFullYear()
+      const check = currentYear - 100 < intValue && intValue < currentYear + 1;
+      if (!check) {
+        yield put(setFormError(new Error('Must be under a 100 years old')));
+        return;
+      }
+    }
+    
+    // convert values to proper types
 
     const newUser : IUser | null = yield call(addNewUser, userData);
     if (!newUser) {
@@ -49,13 +68,15 @@ const addNewUserSaga = function* ({ payload }: IInsertUser) {
       return;
     }
 
-    if (!loggedIn) {
-      yield put(setUser(newUser));
-    }
     yield put(setFormError(null));
-    yield put(addNewUserInfo(INIT_NEW_USER_INFO));
+    yield call(clearSessionFormData);
+    yield put(addNewUserInfo(INIT_NEW_USER_INFO()));
     yield put(setCurrentFormPage(1));
-    navigate('/data');
+    yield put(setModal({
+      title: 'Successful Submission',
+      message: `Congratulations ${newUser.firstName}, you been added to the system`,
+      onConfirm: () => { navigate('/data') },
+    }));
   } catch (e: any) {
     console.error(e);
     yield put(setFormError(new Error(e?.response?.data?.error || 'Failed add user api request')));
