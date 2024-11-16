@@ -7,13 +7,14 @@ export const InputContainer = styled.div`
 export const StyledInput = styled.input`
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 2px solid #033d03;
     font-size: 16px;
+    border-radius: 5px;
+    transition: border-color 0.3s, box-shadow 0.3s;
     
     &:focus {
-        border-color: #007bff;
-        outline: none;
+      border-color: #52d752;
+      outline: none;
     }
 `;
 

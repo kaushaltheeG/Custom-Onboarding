@@ -9,13 +9,13 @@ export const CenteringDiv = styled.div`
 `;
 
 export const Container = styled.div`
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 20px;
-    width: 40rem;
-    height: 20rem;
+  background-color: #c9e2c4;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  margin: 20px;
+  width: 40rem;
+  height: 20rem;
 `;
 
 export const OptionContainer = styled.div`

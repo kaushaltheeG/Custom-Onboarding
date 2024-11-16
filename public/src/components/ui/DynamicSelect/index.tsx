@@ -13,7 +13,7 @@ interface DynamicSelectProps {
 const DynamicSelect: React.FC<DynamicSelectProps> = ({ label, options, value, name, onChange }) => {
     const calculateWidth = (options: string[] | number[]) => {
       const maxWidth = options.reduce((max: number, option: string | number) => {
-        const width = String(option).length * 8; // Approximate width (adjust as needed)
+        const width = String(option).length * 10; // Approximate width (adjust as needed)
         return Math.max(max, width);
       }, 0);
 

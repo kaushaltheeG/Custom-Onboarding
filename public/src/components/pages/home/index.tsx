@@ -39,13 +39,13 @@ const Home: React.FC = () => {
           <FormContainer>
             {validationForm()}
           </FormContainer>
-          { error && <ErrorComponent message={error.message}/>}
           <FormControler
             onNext={onNext}
             onPrev={onPrev}
             onSubmit={onSubmit}
             currentPage={currentFormPage}
             />
+          {error && <ErrorComponent message={error.message}/>}
         </CenteringDiv>
       </FixedWidth>
     </FlexContainer>
