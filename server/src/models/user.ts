@@ -1,5 +1,5 @@
 import assert from "assert";
-import IUser from "../interfaces/models/IUser"; // isValidUserData
+import IUser from "../interfaces/models/IUser";
 import Base from "./base";
 import { isValidEmail } from "../utils/validations";
 
@@ -9,17 +9,15 @@ class User extends Base<IUser> {
   private _email!: IUser['email'];
   private _passwordHash!: IUser['passwordHash'];
   private _data!: IUser['data'];
-  private _pendingCustomer!: IUser['pendingCustomer'];
 
   constructor(dto: IUser) {
     super(dto);
-    const { firstName, lastName, passwordHash, email, data, pendingCustomer } = dto;
+    const { firstName, lastName, passwordHash, email, data } = dto;
     this._firstName = firstName;
     this._lastName = lastName;
     this._email = email;
     this._passwordHash = passwordHash;
     this._data = data;
-    this._pendingCustomer = pendingCustomer;
   }
 
   get firstName() {
@@ -47,7 +45,7 @@ class User extends Base<IUser> {
   }
 
   set email(value: string) {
-    assert(isValidEmail(value), 'email must be a valid email');
+    assert(isValidEmail(value), 'Email must be a valid email');
     this._email = value;
   }
 
@@ -66,14 +64,5 @@ class User extends Base<IUser> {
   set data(value: IUser['data']) {
     this._data = value;
   }
-
-  get pendingCustomer() {
-    return this._pendingCustomer;
-  }
-
-  set pendingCustomer(value: IUser['pendingCustomer']) {
-    this._pendingCustomer = value;
-  }
-
 }
 export default User;

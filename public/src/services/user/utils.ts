@@ -25,24 +25,5 @@ export const createUserFromInput = (newUserInfo: INewUserInfo): ICreateUser => {
           year,
         },
       },
-      pendingCustomer: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        data: {
-          aboutMe: '',
-          address: {
-            streetName: '',
-            city: '',
-            state: '',
-            zip: '',
-          },
-          birthday: {
-            month: '',
-            day: 0,
-            year: 0,
-          },
-        },
-      },
     };
 };

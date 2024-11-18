@@ -16,13 +16,13 @@ const EmailAndPassword: React.FC<IEmailAndPasswordProps> = ({
   newUser,
   handleChange,
 }) => {
-  const [passwordTwo, setPasswordTwo] = React.useState(''); // move this logic to debouncer
+  const [passwordTwo, setPasswordTwo] = React.useState(newUser.password || ''); // move this logic to debouncer
   const dispatch = useDispatch<Dispatch<IFormActions>>();
   const formError = useSelector(getFormError);
 
  const checkPassword = React.useCallback(() => {
     const passwordOne = newUser.password;
-    if (!passwordOne.length || !passwordTwo.length) {
+    if (!passwordOne.length && !passwordTwo.length) {
       return; 
     }
 

@@ -44,25 +44,6 @@
         year: string,
       },
     },
-    pendingCustomer: {
-        firstName: string,
-        lastName: string,
-        email: string,
-        data: {
-          aboutMe: string,
-          address: {
-            streetName: string,
-            city: string,
-            state: string,
-            zip: string,
-          },
-          birthday: {
-            month: string,
-            day: string,
-            year: string,
-          },
-        },
-    },
     created: number
 }
 ```
@@ -112,7 +93,7 @@
 
  ## Future Features
    1. **Saving unfished customer onboarding**
-         - As of now, there is a object field called `pendingCustomer` within each user document. This field is used to save any unfinished onboarding the user was doing before exiting the app. This feature can easily be implemented after creating a new route to update that user's document and adding some frontend logic to make these saves.
+         - The session storage is utilized to keep state of the form and onboarding information if the webpage reloads.
   2. **Auth**
        - There is no auth implemented within the application. The password hash needs salt added to it, JWT needs to be incorporated for proper validation, and session cookies need to be utilized to keep the user logged in.
   3. **Customer Search and table improvements**

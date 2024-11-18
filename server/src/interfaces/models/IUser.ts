@@ -29,12 +29,6 @@ interface IUser extends IModel {
   email: string;
   passwordHash: string;
   data: IUserData;
-  pendingCustomer: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    data: IUserData;
-  },
 }
 export default IUser;
 
@@ -78,14 +72,4 @@ export const isValidBirthday = (obj: any, checkLength = true): boolean => {
     return firstCheck;
   }
   return firstCheck  && obj.month.length;
-};
-
-export const isValidPendingCustomer = (obj: any): boolean => {
-  return (
-    'firstName' in obj &&
-    'lastName' in obj &&
-    'email' in obj &&
-    'data' in obj &&
-    isValidUserData(obj.data, false)
-  );
 };

@@ -8,15 +8,9 @@ interface TextAreaProps {
     name: string;
     handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
+
 const TextArea: React.FC<TextAreaProps> = ({ label, maxChars, value, handleChange, name }) => {
     const isMaxReached = value.length >= maxChars;
-
-    // const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    //     const newValue = e.target.value;
-    //     if (newValue.length <= maxChars) {
-    //         onChange(newValue);
-    //     }
-    // };
 
     return (
         <TextAreaContainer>
@@ -26,7 +20,7 @@ const TextArea: React.FC<TextAreaProps> = ({ label, maxChars, value, handleChang
                 value={value}
                 onChange={handleChange}
                 isMaxReached={isMaxReached}
-                maxLength={maxChars} // This limits the input length in the textarea
+                maxLength={maxChars}
             />
             <CharCount isMaxReached={isMaxReached}>
                 {value.length}/{maxChars}

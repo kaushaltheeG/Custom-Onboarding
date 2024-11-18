@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import { mobileOnly } from "../../../utils";
 
 export const SelectContainer = styled.div`
-  margin: 20px 0; // Adjust margin as needed
+  margin: 20px 0;
+  overflow: visible;
 `;
 
 export const StyledLabel = styled.label`
@@ -26,4 +28,10 @@ export const StyledSelect = styled.select<{ dynamicWidth: number }>`
     border-color: #52d752;
     outline: none;
   }
+
+  ${mobileOnly`
+    position: relative;
+    z-index: 10;
+    width: 100%;
+  `}
 `;
