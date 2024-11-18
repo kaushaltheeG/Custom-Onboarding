@@ -1,5 +1,5 @@
 # Custom-Onboarding
- ![Screenshot 2024-11-07 at 12 25 09 AM](https://github.com/user-attachments/assets/dbd7beee-4292-4eba-a07b-d109a52283a7)
+![Screenshot 2024-11-17 at 9 05 22 PM](https://github.com/user-attachments/assets/4a4dfb8c-8d1a-46f2-a8e2-ea406235b20c)
 
 
  Welcome to the Custom Onboarding App! This application is a very simple app that allows users to add customers to their `user` database;
@@ -76,20 +76,22 @@
  ## Site Paths
   This app has three different paths:
  ### Home(/)
-  - This is the landing screen for users. It prompts the user to enter their email and password to see if their information exists. If so, it temporarily logs the user in. If not, the user will create a new user, in which their information will be onboarded. Also, the newly onboarded user will temporarily log in the user if no user is logged in.
- ![Screenshot 2024-11-07 at 12 25 09 AM](https://github.com/user-attachments/assets/dbd7beee-4292-4eba-a07b-d109a52283a7)
+  - This is the landing screen for users to onboard their information into the system.
+![Screenshot 2024-11-17 at 9 05 22 PM](https://github.com/user-attachments/assets/4a4dfb8c-8d1a-46f2-a8e2-ea406235b20c)
   - The controller below the form has two functions: 1. indicate at what stage on the onboarding form the user is on and 2. move to different parts of the form; Before you can go to the next form page, a check is performed to ensure all the rendered input fields have be filled out! The state of the form is saved, so all the entered information will remain in state until the information is inserted into the database. If any checks or API requests fail, an error message will appear.
-![Screenshot 2024-11-07 at 12 32 57 AM](https://github.com/user-attachments/assets/5d72fda6-2f92-4926-9803-b7d0962da8db)
-![Screenshot 2024-11-07 at 12 34 02 AM](https://github.com/user-attachments/assets/0b942ea6-e552-4b8e-924d-e23fb2f6d515)
+![Screenshot 2024-11-17 at 9 09 45 PM](https://github.com/user-attachments/assets/aa149e7e-7abc-4909-b2c5-5319eb236286)
+
   - After a successful onboarding of a customer, the user is taken to the data table found under the `/data` path,
+![Screenshot 2024-11-17 at 9 12 31 PM](https://github.com/user-attachments/assets/feeaa883-498b-4f06-ac98-85b9d193c762)
+
 
  ### Admin(/admin)
   - This allows the user to toggle off and on the `about me`, `address`, and `birthday` form components within pages two and three. It also allows the user to organize the components on a form's page if more than one is active. The rules are there must be at least one component on pages two and three at all times, and if two components are on the same page, they cannot have the same order number. If the new layout is valid, the user can submit this layout and then will be taken to the home page(`/`) to onboard another customer with the new form layout. If any checks fail, an error message will appear.
-![Screenshot 2024-11-07 at 12 40 05 AM](https://github.com/user-attachments/assets/f1359c60-a8c5-4dec-9200-9ecec3656701)
+![Screenshot 2024-11-17 at 9 12 56 PM](https://github.com/user-attachments/assets/5c44af33-610c-4cd4-b5ef-2cb25b34f359)
 
  ### Data(/data)
   - A simple data table that showcases all the onboarded users within the `user` collection of the database. It fetches the most up-to-date data whenever the user navigates to this path.
-![Screenshot 2024-11-07 at 12 44 35 AM](https://github.com/user-attachments/assets/13ab44bf-c283-4878-8a9b-232c6fbfe98a)
+![Screenshot 2024-11-17 at 9 13 17 PM](https://github.com/user-attachments/assets/3732afa9-775e-45bb-a93c-5f8ec9e13df1)
 
  ## Future Features
    1. **Saving unfished customer onboarding**
