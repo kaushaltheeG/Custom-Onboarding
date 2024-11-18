@@ -39,7 +39,7 @@ const Data: React.FC = () => {
                 {user.data.birthday.month} {user.data.birthday.day}, {user.data.birthday.year}
               </td>
               <td>
-                {`${user.data.address.streetName} ${user.data.address.city} ${user.data.address.state}, ${user.data.address.zip}`}
+                {`${user.data.address.streetName}, ${user.data.address.city}, ${user.data.address.state}, ${user.data.address.zip}`}
               </td>
               <td>{user.data.aboutMe}</td>
             </tr>

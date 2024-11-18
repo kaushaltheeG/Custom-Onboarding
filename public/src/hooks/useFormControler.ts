@@ -7,6 +7,7 @@ import { Dispatch } from "redux";
 import { insertUser, IUserActions } from '../services/user/actions';
 import { useNavigate } from "react-router";
 import { SESSION_STORAGE_FORM_STATE } from "../utils";
+import { getFormError } from "../services/form/selector";
 
 const useFormControler = (state: number): {
   onPrev: () => void;
@@ -17,6 +18,7 @@ const useFormControler = (state: number): {
   const newUserInfo = useSelector(getNewUserInfo);
   const currentPageLayoutMap = useSelector(getCurrentPageMap);
   const dispatch = useDispatch<Dispatch<IFormActions | IUserActions>>();
+  const formError = useSelector(getFormError);
   const navigate = useNavigate();
   const onPrev = () => {
     if (!stack.length) {
@@ -30,7 +32,7 @@ const useFormControler = (state: number): {
   }
 
   const onNext = () => {
-    if (!queue.length) {
+    if (!queue.length || formError) {
       return;
     }
     // check if field for current page is filled
