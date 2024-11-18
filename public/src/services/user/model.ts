@@ -30,12 +30,6 @@ interface IUser {
   email: string;
   passwordHash: string;
   data: IUserData;
-  pendingCustomer: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    data: IUserData;
-  },
 }
 export default IUser;
 
