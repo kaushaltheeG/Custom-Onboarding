@@ -4,7 +4,7 @@ import { NavbarContainer, NavLink } from "./styles";
 const Navbar: React.FC = () => {
     return (
         <NavbarContainer>
-            <NavLink to="/">Onboarding</NavLink>
+            <NavLink to="/">Onboard</NavLink>
             <NavLink to="/admin">Form Layout</NavLink>
             <NavLink to="/data">User Datatable</NavLink>
         </NavbarContainer>
