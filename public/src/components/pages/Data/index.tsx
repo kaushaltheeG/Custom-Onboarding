@@ -27,10 +27,7 @@ const Data: React.FC = () => {
             <th>Last Name</th>
             <th>Email</th>
             <th>About Me</th>
-            <th>Street Name</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Zip</th>
+            <th>Address</th>
             <th>Birthday</th>
           </tr>
         </thead>
@@ -41,10 +38,9 @@ const Data: React.FC = () => {
               <td>{user.lastName}</td>
               <td>{user.email}</td>
               <td>{user.data.aboutMe}</td>
-              <td>{user.data.address.streetName}</td>
-              <td>{user.data.address.city}</td>
-              <td>{user.data.address.state}</td>
-              <td>{user.data.address.zip}</td>
+              <td>
+                {`${user.data.address.streetName} ${user.data.address.city} ${user.data.address.state}, ${user.data.address.zip}`}
+              </td>
               <td>
                 {user.data.birthday.month} {user.data.birthday.day}, {user.data.birthday.year}
               </td>

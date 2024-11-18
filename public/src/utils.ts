@@ -1,3 +1,5 @@
+import { CSSObject, Interpolation, css } from "styled-components";
+
 export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
@@ -82,4 +84,14 @@ export const stateAcronymList = [
     "WI", // Wisconsin
     "WY"  // Wyoming
 ];
+const makeMediaQuery = (
+  fn: (first: TemplateStringsArray | CSSObject, ...args: any[]) => Interpolation<any>
+) => fn;
 
+export const mobileOnly = makeMediaQuery(
+  (first, ...args) => css`
+    @media (max-width: 896px) {
+      ${css(first, ...args)}
+    }
+  `
+);
